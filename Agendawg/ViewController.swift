@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let times = Course.dates(forTime: "130- 320", days: "TTh")
+
         webView.delegate = self
         let request = URLRequest(url: registrationURL)
         webView.loadRequest(request)
