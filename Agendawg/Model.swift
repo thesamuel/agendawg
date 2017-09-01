@@ -17,9 +17,10 @@ class Model: NSObject {
         case parseError
     }
 
-    var courses: [Course]?
     private static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
-    private var filteredCourses: [Course]?
+
+    var courses: [Course]?
+    var filteredCourses: [Course]?
 
     func filterCourses(isIncluded: @escaping (Course) -> Bool) {
         filteredCourses = courses?.filter(isIncluded)

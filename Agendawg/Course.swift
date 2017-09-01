@@ -134,11 +134,11 @@ struct Course {
 extension Course: Hashable {
 
     var hashValue: Int {
-        return course.hashValue
+        return SLN.hashValue
     }
 
     static func == (lhs: Course, rhs: Course) -> Bool {
-        return lhs.course == rhs.course
+        return lhs.SLN == rhs.SLN
     }
     
 }
