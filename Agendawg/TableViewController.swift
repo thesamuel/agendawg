@@ -12,9 +12,14 @@ class TableViewController: UITableViewController {
 
     var model: Model! {
         didSet {
+            checked.removeAll()
+            model.courses?.forEach({ (_) in
+                checked.append(true)
+            })
             tableView.reloadData()
         }
     }
+    var checked = [Bool]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +50,26 @@ class TableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell",
+                                                       for: indexPath) as? CourseTableViewCell else {
+            fatalError()
+        }
 
         let course = model.courses?[indexPath.row]
-        cell.textLabel?.text = course?.title
+        cell.title = course?.title.capitalized
+        cell.detail = course?.course
+        cell.emoji = course?.emoji
+        cell.accessoryType = checked[indexPath.row] ? .checkmark : .none
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            checked[indexPath.row] = !checked[indexPath.row]
+            cell.accessoryType = checked[indexPath.row] ? .checkmark : .none
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 

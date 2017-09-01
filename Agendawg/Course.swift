@@ -16,6 +16,20 @@ struct Course {
         case quiz = "QZ"
     }
 
+    enum Emoji: String {
+        case cse = "💻"
+        case anthropology = "👴🏻"
+        case info = "📈"
+        case business = "💰"
+        case biology = "🐒"
+        case mechanical = "⚙️"
+        case psychology = "🤔"
+        case bioengineering = "🔬"
+        case nursing = "🏥"
+        case math = "🆘"
+        case unknown = "🎓"
+    }
+
     enum Index: Int {
         case SLN = 0    // 0. "10290"
         case course     // 1. "ANTH 101 A"
@@ -42,6 +56,7 @@ struct Course {
     let credits: Double?
     let location: String?
     let instructor: String?
+    let emoji: Emoji?
 
     init?(row: [String]) {
         guard row.count == 10 else {
@@ -68,12 +83,50 @@ struct Course {
 
         // Optional properties
         credits = Double(row[Index.credits.rawValue])
+        emoji = Course.emoji(for: course)
 
         let location = row[Index.location.rawValue]
         self.location = !location.isEmpty ? location : nil
 
         let instructor = row[Index.instructor.rawValue]
         self.instructor = !instructor.isEmpty ? instructor : nil
+    }
+
+    static func emoji(for course: String) -> Emoji? {
+        let components = course.components(separatedBy: " ")
+        guard let department = components.first?.lowercased() else {
+            return nil
+        }
+        switch department {
+        case "anth", "archy", "bio a":
+            return .anthropology
+        case "bioen", "marbio", "medeng", "pharbe":
+            return .bioengineering
+        case "biol":
+            return .biology
+        case "acctg", "admin", "b a", "ba rm",
+             "b cmu", "b econ", "b pol", "ebiz",
+             "entre", "fin", "hrmob", "i s",
+             "msis", "i bus", "mgmt", "mktg",
+             "opmgt", "o e", "qmeth", "st mgt",
+             "scm":
+            return .business
+        case "cse":
+            return .cse
+        case "info", "infx", "insc", "imt", "lis":
+            return .info
+        case "math", "amath", "cfrm":
+            return .math
+        case "m e", "meie":
+            return .mechanical
+        case "nsg", "nurs", "nclin", "nmeth":
+            return .nursing
+        case "psych":
+            return .psychology
+        default:
+            break
+        }
+        return Emoji.unknown
     }
 
 }

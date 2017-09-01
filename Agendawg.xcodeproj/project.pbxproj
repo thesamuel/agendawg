@@ -11,6 +11,7 @@
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
 		61A924931F594F9D002C088A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924921F594F9D002C088A /* TableViewController.swift */; };
+		61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924941F59E9C9002C088A /* CourseTableViewCell.swift */; };
 		61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE98491F57F81300DCB3B4 /* AppDelegate.swift */; };
 		61CE984C1F57F81300DCB3B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE984B1F57F81300DCB3B4 /* ViewController.swift */; };
 		61CE984F1F57F81300DCB3B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61CE984D1F57F81300DCB3B4 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		61A924921F594F9D002C088A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		61A924941F59E9C9002C088A /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		61CE98461F57F81300DCB3B4 /* Agendawg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendawg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61CE98491F57F81300DCB3B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61CE984B1F57F81300DCB3B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				61A924921F594F9D002C088A /* TableViewController.swift */,
 				612D83501F59024200AE9577 /* Model.swift */,
 				612D834E1F58FF4400AE9577 /* Course.swift */,
+				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
 				61CE98501F57F81300DCB3B4 /* Assets.xcassets */,
 				61CE98521F57F81300DCB3B4 /* LaunchScreen.storyboard */,
@@ -229,6 +232,7 @@
 			files = (
 				612D834F1F58FF4400AE9577 /* Course.swift in Sources */,
 				61CE984C1F57F81300DCB3B4 /* ViewController.swift in Sources */,
+				61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */,
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
 				61A924931F594F9D002C088A /* TableViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Model.swift in Sources */,

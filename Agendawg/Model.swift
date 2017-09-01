@@ -8,11 +8,20 @@
 
 import UIKit
 import Kanna
+import EventKit
 
 class Model: NSObject {
 
+    enum ModelError: Error {
+        case parseError
+    }
+
     static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
     var courses: [Course]?
+
+//    func event(forCourse: Course) -> EKEvent {
+//
+//    }
 
     func parseHTML(html: String) -> Bool {
         guard let doc = try? Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
@@ -41,18 +50,16 @@ class Model: NSObject {
             currentRow.append(trimmed)
         }
 
-        self.courses = rows.reduce([Course]()) { (result, row) -> [Course] in
+        guard let courses = try? rows.map { (row) -> Course in
             guard let course = Course(row: row) else {
-                fatalError()
+                throw ModelError.parseError
             }
-            return result + [course]
-        }
-        
-        guard let courseCount = self.courses?.count,
-            courseCount > 0 else {
+            return course
+            }, courses.count > 0 else {
                 return false
         }
 
+        self.courses = courses
         print("Courses parsed.")
         return true
     }
