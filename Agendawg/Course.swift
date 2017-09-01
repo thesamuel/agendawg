@@ -17,16 +17,16 @@ struct Course {
     }
 
     enum Emoji: String {
-        case cse = "💻"
         case anthropology = "👴🏻"
-        case info = "📈"
-        case business = "💰"
-        case biology = "🐒"
-        case mechanical = "⚙️"
-        case psychology = "🤔"
         case bioengineering = "🔬"
-        case nursing = "🏥"
+        case biology = "🐒"
+        case business = "💰"
+        case cse = "💻"
+        case informatics = "📈"
         case math = "🆘"
+        case mechanical = "⚙️"
+        case nursing = "🏥"
+        case psychology = "🤔"
         case unknown = "🎓"
     }
 
@@ -114,7 +114,7 @@ struct Course {
         case "cse":
             return .cse
         case "info", "infx", "insc", "imt", "lis":
-            return .info
+            return .informatics
         case "math", "amath", "cfrm":
             return .math
         case "m e", "meie":
@@ -129,6 +129,18 @@ struct Course {
         return Emoji.unknown
     }
 
+}
+
+extension Course: Hashable {
+
+    var hashValue: Int {
+        return course.hashValue
+    }
+
+    static func == (lhs: Course, rhs: Course) -> Bool {
+        return lhs.course == rhs.course
+    }
+    
 }
 
 // MARK: dates functions

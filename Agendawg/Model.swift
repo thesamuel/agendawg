@@ -9,6 +9,7 @@
 import UIKit
 import Kanna
 import EventKit
+import DateToolsSwift
 
 class Model: NSObject {
 
@@ -16,12 +17,45 @@ class Model: NSObject {
         case parseError
     }
 
-    static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
     var courses: [Course]?
+    private static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
+    private var filteredCourses: [Course]?
 
-//    func event(forCourse: Course) -> EKEvent {
-//
-//    }
+    func filterCourses(isIncluded: @escaping (Course) -> Bool) {
+        filteredCourses = courses?.filter(isIncluded)
+    }
+
+    func saveEvents(toCalendar selectedCalendar: EKCalendar,
+                    inEventStore eventStore: EKEventStore) -> Bool {
+        guard let calendar = eventStore.calendar(withIdentifier: selectedCalendar.calendarIdentifier) else {
+            return false
+        }
+
+        print("Testing: will only save first course.")
+        guard let course = courses?.first else {
+            return false
+        }
+
+        // Create event
+        let event = EKEvent(eventStore: eventStore)
+        event.calendar = calendar
+        event.title = course.title
+
+        // Set event start/end from course
+        guard let timePeriod = course.dates.first else {
+            return false
+        }
+        event.startDate = timePeriod.beginning
+        event.endDate = timePeriod.end
+
+        do {
+            try eventStore.save(event, span: .thisEvent)
+        } catch {
+            return false
+        }
+
+        return true
+    }
 
     func parseHTML(html: String) -> Bool {
         guard let doc = try? Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {

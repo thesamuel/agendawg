@@ -162,12 +162,44 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Courses" id="WNj-nc-G1L">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="5Nq-eE-7mv"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="5Nq-eE-7mv">
+                            <connections>
+                                <segue destination="zyV-Xh-ufO" kind="show" id="OcI-8r-Pgj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ly4-DO-CvO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2182.608695652174" y="43.206521739130437"/>
+        </scene>
+        <!--Select Calendar-->
+        <scene sceneID="J3t-l1-vbR">
+            <objects>
+                <tableViewController title="Select Calendar" id="zyV-Xh-ufO" customClass="CalendarTableViewController" customModule="Agendawg" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9PV-rb-BfU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarCell" id="ig5-T5-H6i">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ig5-T5-H6i" id="cHJ-tV-USK">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zyV-Xh-ufO" id="Gxz-Ax-z9J"/>
+                            <outlet property="delegate" destination="zyV-Xh-ufO" id="QFq-Ca-vfY"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4F-WN-VbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3113" y="43"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vGr-Ia-Dgg">
