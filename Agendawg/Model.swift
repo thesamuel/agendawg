@@ -14,12 +14,16 @@ class Model: NSObject {
     static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
     var courses: [Course]?
 
-    func parseHTML(html: String) {
+    func parseHTML(html: String) -> Bool {
         guard let doc = try? Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
-            return
+            return false
         }
 
         let registrationTableElements = doc.xpath(Model.registrationTableXpath)
+        guard registrationTableElements.count > 0 else {
+            return false
+        }
+
         var rows = [[String]]()
         var currentRow = [String]()
         for element in registrationTableElements {
@@ -28,25 +32,29 @@ class Model: NSObject {
                 currentRow = [String]()
             }
 
-            guard let text = element.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
-                print("error parsing HTML")
-                return
+            guard let text = element.text else {
+                print("Error parsing HTML.")
+                return false
             }
 
-            currentRow.append(text)
+            let trimmed = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            currentRow.append(trimmed)
         }
 
         self.courses = rows.reduce([Course]()) { (result, row) -> [Course] in
             guard let course = Course(row: row) else {
-                    fatalError()
+                fatalError()
             }
             return result + [course]
         }
         
-        if let courseCount = self.courses?.count,
-            courseCount > 0 {
-            print("done")
+        guard let courseCount = self.courses?.count,
+            courseCount > 0 else {
+                return false
         }
+
+        print("Courses parsed.")
+        return true
     }
 
 }

@@ -11,9 +11,6 @@ import DateToolsSwift
 
 struct Course {
 
-    static let startDate = Date(dateString: "September 27, 2017", format: "MMMM d, yyyy")
-    static let endDate = Date(dateString: "December 8, 2017", format: "MMMM d, yyyy")
-    
     enum CourseType: String {
         case lecture = "LC"
         case quiz = "QZ"
@@ -24,7 +21,7 @@ struct Course {
         case course     // 1. "ANTH 101 A"
         case type       // 2. "LC"
         case credits    // 3. "5.0"
-        case grading    // 4. "standard\nS/NS\n"
+        case grading    // 4. "standard\nS/NS\n" (ignore)
         case title      // 5. "EXPLORING SOC ANTHR"
         case days       // 6. "MW"
         case time       // 7. "130- 320" or "1030-1120"
@@ -40,10 +37,11 @@ struct Course {
     let course: String
     let title: String
     let type: CourseType
+    let dates: [TimePeriod]
 
-    let credits: Double? // Optional
-    let location: String? // Optional
-    let instructor: String? // Optional
+    let credits: Double?
+    let location: String?
+    let instructor: String?
 
     init?(row: [String]) {
         guard row.count == 10 else {
@@ -63,10 +61,10 @@ struct Course {
         course = row[Index.course.rawValue]
         title = row[Index.title.rawValue]
 
-        // Create an event from the days and time
+        // Create TimePeriods from days and time
         let time = row[Index.time.rawValue]
         let days = row[Index.days.rawValue]
-        let dates = Course.dates(forTime: time, days: days)
+        dates = Course.dates(forTime: time, days: days)
 
         // Optional properties
         credits = Double(row[Index.credits.rawValue])
@@ -80,7 +78,14 @@ struct Course {
 
 }
 
+// MARK: dates functions
+
 extension Course {
+
+    static let startDate = Date(dateString: "September 27, 2017", format: "MMMM d, yyyy")
+    static let endDate = Date(dateString: "December 8, 2017", format: "MMMM d, yyyy")
+    static let dayChunk = TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 1,
+                                    weeks: 0, months: 0, years: 0)
 
     enum Weekday: Int {
         case monday = 2
@@ -90,9 +95,7 @@ extension Course {
         case friday
     }
 
-    static let dayChunk = TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 1, weeks: 0, months: 0, years: 0)
-
-    static func dates(forTime time: String, days: String) -> [(Date, Date)] {
+    static func dates(forTime time: String, days: String) -> [TimePeriod] {
         let formattedTime = formatTime(time: time)
         guard formattedTime.count == 2 else {
             fatalError()
@@ -103,7 +106,7 @@ extension Course {
             fatalError()
         }
 
-        return formattedWeekdays.map { (weekday) -> (Date, Date) in
+        return formattedWeekdays.map { (weekday) -> TimePeriod in
             let adjustedDates = formattedTime.map({ (date) -> Date in
                 let adjustmentDate = firstWeekday(weekday: weekday, date: startDate)
                 var date = date
@@ -112,7 +115,8 @@ extension Course {
                 date.year(adjustmentDate.year)
                 return date
             })
-            return (adjustedDates[0], adjustedDates[1])
+            return TimePeriod(beginning: adjustedDates[0],
+                              end: adjustedDates[1])
         }
     }
 
@@ -172,7 +176,8 @@ extension Course {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hhmm a"
-        dateFormatter.locale = Locale.init(identifier: "en_US")
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeZone = TimeZone(abbreviation: "PST")
         return formattedTime.map { (time) -> Date in
             guard let date = dateFormatter.date(from: time) else {
                 fatalError()
