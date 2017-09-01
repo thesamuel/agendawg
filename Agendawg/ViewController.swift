@@ -9,17 +9,27 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var parseBarButton: UIBarButtonItem!
+    @IBOutlet weak var webView: UIWebView!
+    let registrationURL = URL(string: "https://sdb.admin.uw.edu/students/uwnetid/register.asp")!
+    let model = Model()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        webView.delegate = self
+        let request = URLRequest(url: registrationURL)
+        webView.loadRequest(request)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
+extension ViewController: UIWebViewDelegate {
+
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if let html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML") {
+            model.parseHTML(html: html)
+        }
+    }
+
+}

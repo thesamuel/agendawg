@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */; };
+		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
+		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
 		61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE98491F57F81300DCB3B4 /* AppDelegate.swift */; };
 		61CE984C1F57F81300DCB3B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE984B1F57F81300DCB3B4 /* ViewController.swift */; };
 		61CE984F1F57F81300DCB3B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61CE984D1F57F81300DCB3B4 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.debug.xcconfig"; sourceTree = "<group>"; };
+		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		61CE98461F57F81300DCB3B4 /* Agendawg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendawg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61CE98491F57F81300DCB3B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61CE984B1F57F81300DCB3B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +28,8 @@
 		61CE98501F57F81300DCB3B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61CE98531F57F81300DCB3B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61CE98551F57F81300DCB3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.release.xcconfig"; sourceTree = "<group>"; };
+		BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendawg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24B4ECF0A60817357586FFA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		61CE983D1F57F81300DCB3B4 = {
 			isa = PBXGroup;
 			children = (
 				61CE98481F57F81300DCB3B4 /* Agendawg */,
 				61CE98471F57F81300DCB3B4 /* Products */,
+				F0BC251492A4AC101F8D034F /* Pods */,
+				24B4ECF0A60817357586FFA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +75,23 @@
 			children = (
 				61CE98491F57F81300DCB3B4 /* AppDelegate.swift */,
 				61CE984B1F57F81300DCB3B4 /* ViewController.swift */,
+				612D83501F59024200AE9577 /* Model.swift */,
+				612D834E1F58FF4400AE9577 /* Course.swift */,
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
 				61CE98501F57F81300DCB3B4 /* Assets.xcassets */,
 				61CE98521F57F81300DCB3B4 /* LaunchScreen.storyboard */,
 				61CE98551F57F81300DCB3B4 /* Info.plist */,
 			);
 			path = Agendawg;
+			sourceTree = "<group>";
+		};
+		F0BC251492A4AC101F8D034F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */,
+				6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61CE98581F57F81300DCB3B4 /* Build configuration list for PBXNativeTarget "Agendawg" */;
 			buildPhases = (
+				04DC266D127FB25EE021DC26 /* [CP] Check Pods Manifest.lock */,
 				61CE98421F57F81300DCB3B4 /* Sources */,
 				61CE98431F57F81300DCB3B4 /* Frameworks */,
 				61CE98441F57F81300DCB3B4 /* Resources */,
+				D082338C76654BF7C00B2795 /* [CP] Embed Pods Frameworks */,
+				543BBEC0509DD5FF070FDDA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,13 +163,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04DC266D127FB25EE021DC26 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Agendawg-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		543BBEC0509DD5FF070FDDA0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D082338C76654BF7C00B2795 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		61CE98421F57F81300DCB3B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				612D834F1F58FF4400AE9577 /* Course.swift in Sources */,
 				61CE984C1F57F81300DCB3B4 /* ViewController.swift in Sources */,
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
+				612D83511F59024200AE9577 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +362,7 @@
 		};
 		61CE98591F57F81300DCB3B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 567KX7DD6P;
@@ -285,6 +377,7 @@
 		};
 		61CE985A1F57F81300DCB3B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 567KX7DD6P;
