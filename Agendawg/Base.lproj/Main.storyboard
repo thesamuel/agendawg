@@ -56,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You'll need to sign into MyUW on the next page." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QM0-mS-Yd8">
-                                <rect key="frame" x="20" y="674.33333333333348" width="374" height="45.666666666666629"/>
+                                <rect key="frame" x="20" y="670.33333333333348" width="374" height="45.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                             <constraint firstItem="fde-j3-EYf" firstAttribute="trailing" secondItem="VbG-ID-nhj" secondAttribute="trailingMargin" id="l5d-Qk-DxM"/>
                             <constraint firstItem="SP9-KA-jma" firstAttribute="trailing" secondItem="VbG-ID-nhj" secondAttribute="trailingMargin" id="n8L-2D-V3G"/>
                             <constraint firstItem="7xE-y7-Tg7" firstAttribute="trailing" secondItem="SP9-KA-jma" secondAttribute="trailing" id="yQi-HR-vIz"/>
-                            <constraint firstItem="uyC-X9-fns" firstAttribute="bottom" secondItem="QM0-mS-Yd8" secondAttribute="bottom" constant="16" id="zeA-oz-WVZ"/>
+                            <constraint firstItem="uyC-X9-fns" firstAttribute="bottom" secondItem="QM0-mS-Yd8" secondAttribute="bottom" constant="20" id="zeA-oz-WVZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uyC-X9-fns"/>
                     </view>
@@ -116,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Peg-lg-b7g">
-                                <rect key="frame" x="0.0" y="173.66666666666669" width="414" height="562.33333333333326"/>
+                                <rect key="frame" x="0.0" y="161.66666666666669" width="414" height="494.33333333333331"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CourseCell" id="sCX-CP-8il" customClass="CourseTableViewCell" customModule="Agendawg" customModuleProvider="target">
@@ -221,12 +221,12 @@
                             <constraint firstItem="HaX-xR-oQf" firstAttribute="trailing" secondItem="K6Q-21-1R1" secondAttribute="trailing" constant="20" id="Pzv-xV-vxr"/>
                             <constraint firstItem="UD5-07-cKU" firstAttribute="leading" secondItem="HaX-xR-oQf" secondAttribute="leading" id="R32-Dp-wZb"/>
                             <constraint firstItem="Peg-lg-b7g" firstAttribute="leading" secondItem="HaX-xR-oQf" secondAttribute="leading" id="Yac-51-tcy"/>
-                            <constraint firstItem="HaX-xR-oQf" firstAttribute="bottom" secondItem="Peg-lg-b7g" secondAttribute="bottom" id="acp-am-viZ"/>
                             <constraint firstItem="yvp-Aa-MO3" firstAttribute="leading" secondItem="K6Q-21-1R1" secondAttribute="leading" id="bWs-BH-4um"/>
                             <constraint firstItem="yvp-Aa-MO3" firstAttribute="trailing" secondItem="K6Q-21-1R1" secondAttribute="trailing" id="gN3-2p-UZW"/>
                             <constraint firstItem="K6Q-21-1R1" firstAttribute="leading" secondItem="HaX-xR-oQf" secondAttribute="leading" constant="20" id="hv8-0L-UvQ"/>
                             <constraint firstItem="HaX-xR-oQf" firstAttribute="trailing" secondItem="UD5-07-cKU" secondAttribute="trailing" id="j3o-c8-xzm"/>
-                            <constraint firstItem="Peg-lg-b7g" firstAttribute="top" secondItem="yvp-Aa-MO3" secondAttribute="bottom" constant="20" id="jTo-LK-mnT"/>
+                            <constraint firstItem="Peg-lg-b7g" firstAttribute="top" secondItem="yvp-Aa-MO3" secondAttribute="bottom" constant="8" id="jTo-LK-mnT"/>
+                            <constraint firstItem="Peg-lg-b7g" firstAttribute="bottom" secondItem="UD5-07-cKU" secondAttribute="top" id="k1T-G0-ljR"/>
                             <constraint firstItem="HaX-xR-oQf" firstAttribute="trailing" secondItem="Peg-lg-b7g" secondAttribute="trailing" id="kir-by-cEd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HaX-xR-oQf"/>
@@ -261,7 +261,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="14J-Ky-3hb">
-                                <rect key="frame" x="0.0" y="153.66666666666669" width="414" height="582.33333333333326"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CalendarCell" textLabel="zf1-Eu-mqR" style="IBUITableViewCellStyleDefault" id="Nkx-Y1-vmZ">
@@ -322,14 +322,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="14J-Ky-3hb" firstAttribute="top" secondItem="zs5-OA-PdA" secondAttribute="bottom" constant="20" id="50D-70-wcW"/>
+                            <constraint firstItem="14J-Ky-3hb" firstAttribute="top" secondItem="zs5-OA-PdA" secondAttribute="bottom" constant="8" id="50D-70-wcW"/>
                             <constraint firstItem="zs5-OA-PdA" firstAttribute="top" secondItem="ELa-EW-zId" secondAttribute="bottom" constant="20" id="D1L-UM-7aM"/>
+                            <constraint firstItem="14J-Ky-3hb" firstAttribute="bottom" secondItem="8Ne-Sv-7Z9" secondAttribute="top" id="Die-dN-qUl"/>
                             <constraint firstItem="ELa-EW-zId" firstAttribute="top" secondItem="uXc-PN-W7N" secondAttribute="top" constant="20" id="NcR-7t-hbX"/>
                             <constraint firstItem="uXc-PN-W7N" firstAttribute="bottom" secondItem="8Ne-Sv-7Z9" secondAttribute="bottom" id="STo-p8-atp"/>
                             <constraint firstItem="uXc-PN-W7N" firstAttribute="trailing" secondItem="8Ne-Sv-7Z9" secondAttribute="trailing" id="TY6-J5-jPL"/>
                             <constraint firstItem="8Ne-Sv-7Z9" firstAttribute="leading" secondItem="uXc-PN-W7N" secondAttribute="leading" id="WSs-dD-lJ1"/>
                             <constraint firstItem="14J-Ky-3hb" firstAttribute="leading" secondItem="uXc-PN-W7N" secondAttribute="leading" id="ZrN-j3-yMX"/>
-                            <constraint firstItem="uXc-PN-W7N" firstAttribute="bottom" secondItem="14J-Ky-3hb" secondAttribute="bottom" id="aNc-eH-Llh"/>
                             <constraint firstItem="uXc-PN-W7N" firstAttribute="trailing" secondItem="ELa-EW-zId" secondAttribute="trailing" constant="20" id="hbR-31-vci"/>
                             <constraint firstItem="zs5-OA-PdA" firstAttribute="leading" secondItem="ELa-EW-zId" secondAttribute="leading" id="nGl-Kg-rVm"/>
                             <constraint firstItem="uXc-PN-W7N" firstAttribute="trailing" secondItem="14J-Ky-3hb" secondAttribute="trailing" id="oc0-Z0-RtD"/>
@@ -368,8 +368,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wly-Xt-Fmm">
-                                <rect key="frame" x="20" y="193" width="62" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wly-Xt-Fmm">
+                                <rect key="frame" x="20" y="193" width="58.333333333333329" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -380,14 +380,14 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon uses includes &quot;News&quot; icon from Icons8" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL3-WW-ybE">
-                                <rect key="frame" x="20" y="301" width="374" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon uses &quot;News&quot; icon from Icons8" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL3-WW-ybE">
+                                <rect key="frame" x="20" y="301" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8e-hT-EOx">
-                                <rect key="frame" x="20" y="325" width="204" height="30"/>
+                                <rect key="frame" x="20" y="326" width="204" height="30"/>
                                 <state key="normal" title="icons8.com/icon/41662/News"/>
                                 <connections>
                                     <action selector="openIcons8Website:" destination="5E5-MD-FKr" eventType="touchUpInside" id="1Tw-T5-eX8"/>
