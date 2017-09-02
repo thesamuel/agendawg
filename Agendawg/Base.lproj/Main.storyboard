@@ -304,7 +304,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="5E5-MD-FKr" kind="show" id="5xU-59-fxJ"/>
+                                                <action selector="done:" destination="Mgf-ho-8qO" eventType="touchUpInside" id="Erg-P0-cqd"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -341,6 +341,7 @@
                     <connections>
                         <outlet property="doneButton" destination="5v8-FD-YmH" id="7rO-UP-7Cv"/>
                         <outlet property="tableView" destination="14J-Ky-3hb" id="fQZ-Qt-kbu"/>
+                        <segue destination="5E5-MD-FKr" kind="show" identifier="DoneSegue" id="ALq-py-zue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzy-z6-lxN" userLabel="First Responder" sceneMemberID="firstResponder"/>

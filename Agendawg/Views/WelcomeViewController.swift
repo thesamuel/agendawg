@@ -39,7 +39,7 @@ class WelcomeViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationViewController = segue.destination as? UINavigationController {
-            if let loginViewController = navigationViewController.viewControllers[0] as? LoginViewController {
+            if let loginViewController = navigationViewController.viewControllers.first as? LoginViewController {
                 loginViewController.parseHTML = parseHTML
                 self.loginViewController = loginViewController
             }

@@ -14,6 +14,7 @@ class CalendarsViewController: UIViewController {
     let eventStore = EKEventStore()
     var calendars: [EKCalendar]?
     var model: Model!
+    var checkedCalendar: EKCalendar?
 
     var currentPermissionAlert: UIAlertController?
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +31,17 @@ class CalendarsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         checkCalendarAuthorizationStatus()
+    }
+
+    @IBAction func done(_ sender: Any) {
+        if let calendar = checkedCalendar {
+            if model.saveEvents(toCalendar: calendar, inEventStore: eventStore) {
+                print("Events saved successfully.")
+                performSegue(withIdentifier: "DoneSegue", sender: self)
+            } else {
+                print("Error encountered while saving events.")
+            }
+        }
     }
 
 }
@@ -49,19 +61,21 @@ extension CalendarsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell", for: indexPath)
 
-        cell.textLabel?.text = calendars?[indexPath.row].title
+        if let calendar = calendars?[indexPath.row] {
+            cell.textLabel?.text = calendar.title
+            let isChecked = (calendar == checkedCalendar)
+            cell.accessoryType = isChecked ? .checkmark : .none
+        }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let calendar = calendars?[indexPath.row] {
-            if model.saveEvents(toCalendar: calendar, inEventStore: eventStore) {
-                print("Events saved successfully.")
-            } else {
-                print("Error encountered while saving events.")
-            }
+            checkedCalendar = calendar
         }
+        tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
@@ -100,6 +114,7 @@ extension CalendarsViewController {
     func reloadCalendars() {
         DispatchQueue.main.async(execute: {
             self.calendars = self.eventStore.calendars(for: EKEntityType.event)
+            self.checkedCalendar = self.calendars?.first
             self.tableView.reloadData()
         })
     }
