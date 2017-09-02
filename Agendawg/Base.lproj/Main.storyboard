@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kqP-ce-gld">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jej-0Q-oXS">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login-->
+        <!--Login to MyUW-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Agendawg" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W04-DM-mPS">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -32,20 +32,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="AZI-bn-Egk"/>
+                    <navigationItem key="navigationItem" title="Login to MyUW" id="AZI-bn-Egk"/>
                     <connections>
                         <outlet property="webView" destination="W04-DM-mPS" id="sZ5-nS-Rg2"/>
-                        <segue destination="U6a-M6-AeT" kind="show" identifier="SuccessSegue" id="3WX-ce-29i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1324.6376811594205" y="43.206521739130437"/>
+            <point key="canvasLocation" x="2712" y="-752"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="bMa-n9-aby">
             <objects>
-                <viewController id="QNv-SK-r0E" sceneMemberID="viewController">
+                <viewController id="QNv-SK-r0E" customClass="WelcomeViewController" customModule="Agendawg" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VbG-ID-nhj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,7 +68,7 @@
                                     <color key="titleColor" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="jrF-SI-vSX"/>
+                                    <segue destination="KTe-0C-959" kind="presentation" identifier="LoginSegue" id="jrF-SI-vSX"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Agendawg" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="SP9-KA-jma">
@@ -98,10 +97,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="0MC-ND-3HF"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="continueButton" destination="fde-j3-EYf" id="T3B-G0-5An"/>
+                        <segue destination="U6a-M6-AeT" kind="show" identifier="SuccessSegue" animates="NO" id="Ivv-ih-5fV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rkt-UN-4b7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="431.8840579710145" y="42.391304347826093"/>
+            <point key="canvasLocation" x="739.13043478260875" y="42.391304347826093"/>
         </scene>
         <!--Select Courses-->
         <scene sceneID="2wE-Fc-074">
@@ -168,10 +171,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ly4-DO-CvO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2182.608695652174" y="43.206521739130437"/>
+            <point key="canvasLocation" x="1880" y="42"/>
         </scene>
         <!--Select Calendar-->
         <scene sceneID="J3t-l1-vbR">
@@ -186,7 +190,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ig5-T5-H6i" id="cHJ-tV-USK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -199,25 +203,43 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4F-WN-VbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3113" y="43"/>
+            <point key="canvasLocation" x="2622" y="42"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="vGr-Ia-Dgg">
+        <scene sceneID="CLJ-Bb-UTW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kqP-ce-gld" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KTe-0C-959" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mao-dj-Mwy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XtN-03-EGo">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="QNv-SK-r0E" kind="relationship" relationship="rootViewController" id="JfO-CW-RxY"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="GAA-C8-W8z"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ELN-Dn-FL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HOY-oi-1cn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="43"/>
+            <point key="canvasLocation" x="1880" y="-751"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dzb-mm-XdM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jej-0Q-oXS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="r0g-x0-dJs">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QNv-SK-r0E" kind="relationship" relationship="rootViewController" id="OzJ-P0-lvN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="woQ-wR-YYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-183" y="42"/>
         </scene>
     </scenes>
 </document>

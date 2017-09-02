@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */; };
+		612A67771F5A7F4D00B5D72D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */; };
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
 		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.debug.xcconfig"; sourceTree = "<group>"; };
+		612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
 				61A924921F594F9D002C088A /* TableViewController.swift */,
 				61CE984B1F57F81300DCB3B4 /* LoginViewController.swift */,
+				612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				612A67771F5A7F4D00B5D72D /* WelcomeViewController.swift in Sources */,
 				612D834F1F58FF4400AE9577 /* Course.swift in Sources */,
 				61CE984C1F57F81300DCB3B4 /* LoginViewController.swift in Sources */,
 				61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */,

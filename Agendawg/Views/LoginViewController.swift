@@ -12,7 +12,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
     let registrationURL = URL(string: "https://sdb.admin.uw.edu/students/uwnetid/register.asp")!
-    let model = Model()
+    var parseHTML: ((String) -> Void)!
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,26 +21,25 @@ class LoginViewController: UIViewController {
         webView.delegate = self
         let request = URLRequest(url: registrationURL)
         webView.loadRequest(request)
+
+        let activityBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        navigationItem.rightBarButtonItem = activityBarButtonItem
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? TableViewController else {
-            return
-        }
-        destination.model = model
-    }
 }
 
 // MARK: - UIWebViewDelegate
 
 extension LoginViewController: UIWebViewDelegate {
 
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        activityIndicator.startAnimating()
+    }
+
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        guard let html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML") else {
-            return
-        }
-        if model.parseHTML(html: html) {
-            performSegue(withIdentifier: "SuccessSegue", sender: self)
+        activityIndicator.stopAnimating()
+        if let html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML") {
+            parseHTML(html)
         }
     }
 
