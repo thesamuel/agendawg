@@ -20,6 +20,7 @@
 		61CE984F1F57F81300DCB3B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61CE984D1F57F81300DCB3B4 /* Main.storyboard */; };
 		61CE98511F57F81300DCB3B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61CE98501F57F81300DCB3B4 /* Assets.xcassets */; };
 		61CE98541F57F81300DCB3B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61CE98521F57F81300DCB3B4 /* LaunchScreen.storyboard */; };
+		61DB76031F5AB85C002B70DF /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DB76021F5AB85C002B70DF /* DoneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		61CE98501F57F81300DCB3B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61CE98531F57F81300DCB3B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61CE98551F57F81300DCB3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61DB76021F5AB85C002B70DF /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 		6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.release.xcconfig"; sourceTree = "<group>"; };
 		BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendawg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 				61A924921F594F9D002C088A /* CoursesViewController.swift */,
 				61CE984B1F57F81300DCB3B4 /* LoginViewController.swift */,
 				612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */,
+				61DB76021F5AB85C002B70DF /* DoneViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */,
 				61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */,
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
+				61DB76031F5AB85C002B70DF /* DoneViewController.swift in Sources */,
 				61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Model.swift in Sources */,
 				613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */,
