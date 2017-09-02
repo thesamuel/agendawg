@@ -12,6 +12,8 @@ import EventKit
 
 struct Course {
 
+    // MARK: Enums
+
     enum CourseType: String {
         case lecture = "LC"
         case quiz = "QZ"
@@ -51,6 +53,8 @@ struct Course {
         case invalidHoursFormat(String)
     }
 
+    // MARK: Properties
+
     let SLN: Int
     let course: String
     let title: String
@@ -62,6 +66,8 @@ struct Course {
     let location: String?
     let instructor: String?
     let emoji: Emoji?
+
+    // MARK: Lifecycle
 
     init?(row: [String]) {
         guard row.count == 10 else {
@@ -100,6 +106,8 @@ struct Course {
         let instructor = row[Index.instructor.rawValue]
         self.instructor = !instructor.isEmpty ? instructor : nil
     }
+
+    // MARK: Helpers
 
     static func emoji(for course: String) -> Emoji? {
         let components = course.components(separatedBy: " ")
@@ -140,21 +148,9 @@ struct Course {
 
 }
 
-extension Course: Hashable {
+// MARK: Date helper functions
 
-    var hashValue: Int {
-        return SLN.hashValue
-    }
-
-    static func == (lhs: Course, rhs: Course) -> Bool {
-        return lhs.SLN == rhs.SLN
-    }
-    
-}
-
-// MARK: Date functions
-
-extension Course {
+private extension Course {
 
     static let dayChunk = TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 1,
                                     weeks: 0, months: 0, years: 0)
@@ -186,6 +182,39 @@ extension Course {
             return date
         })
         return TimePeriod(beginning: adjustedDates[0], end: adjustedDates[1])
+    }
+
+    static func times(for timeString: String) throws -> [Date] {
+        let timeComponents = timeString.components(separatedBy: "-")
+
+        let formattedTimes = try timeComponents.map { (time) throws -> String in
+            var trimmed = time.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            if trimmed.count == 3 {
+                trimmed = "0" + trimmed
+            }
+
+            let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
+            let hour = trimmed[..<hourIndex]
+            guard let hourInt = Int(hour) else {
+                throw CourseError.invalidHoursFormat(String(hour))
+            }
+            return trimmed + (hourInt >= 7 && hourInt < 12 ? " AM" : " PM")
+        }
+
+        guard formattedTimes.count == 2 else {
+            throw CourseError.invalidTimeFormat(timeString)
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hhmm a"
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeZone = TimeZone(abbreviation: "PST")
+        return formattedTimes.map { (time) -> Date in
+            guard let date = dateFormatter.date(from: time) else {
+                fatalError()
+            }
+            return date
+        }
     }
 
     static func weekdays(for daysString: String) -> [EKWeekday] {
@@ -226,37 +255,16 @@ extension Course {
         return date
     }
 
-    static func times(for timeString: String) throws -> [Date] {
-        let timeComponents = timeString.components(separatedBy: "-")
+}
 
-        let formattedTimes = try timeComponents.map { (time) throws -> String in
-            var trimmed = time.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            if trimmed.count == 3 {
-                trimmed = "0" + trimmed
-            }
+extension Course: Hashable {
 
-            let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
-            let hour = trimmed[..<hourIndex]
-            guard let hourInt = Int(hour) else {
-                throw CourseError.invalidHoursFormat(String(hour))
-            }
-            return trimmed + (hourInt >= 7 && hourInt < 12 ? " AM" : " PM")
-        }
+    var hashValue: Int {
+        return SLN.hashValue
+    }
 
-        guard formattedTimes.count == 2 else {
-            throw CourseError.invalidTimeFormat(timeString)
-        }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hhmm a"
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.timeZone = TimeZone(abbreviation: "PST")
-        return formattedTimes.map { (time) -> Date in
-            guard let date = dateFormatter.date(from: time) else {
-                fatalError()
-            }
-            return date
-        }
+    static func == (lhs: Course, rhs: Course) -> Bool {
+        return lhs.SLN == rhs.SLN
     }
 
 }
