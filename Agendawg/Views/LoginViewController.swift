@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
     let registrationURL = URL(string: "https://sdb.admin.uw.edu/students/uwnetid/register.asp")!
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
 
 // MARK: - UIWebViewDelegate
 
-extension ViewController: UIWebViewDelegate {
+extension LoginViewController: UIWebViewDelegate {
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
         guard let html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML") else {
