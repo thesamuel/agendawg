@@ -41,8 +41,8 @@ class Model: NSObject {
             event.location = course.location
 
             // Set event start/end from course
-            event.startDate = course.firstOccurrence.beginning
-            event.endDate = course.firstOccurrence.end
+            event.startDate = course.firstOccurrence.beginning!
+            event.endDate = course.firstOccurrence.end!
 
             // Add recurrence rules
             let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: course.weekdays)
@@ -84,7 +84,7 @@ class Model: NSObject {
     }
 
     func parseHTML(html: String) -> Bool {
-        guard let doc = try? Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
+        guard let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
             return false
         }
 
