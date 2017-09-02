@@ -15,6 +15,7 @@ class Model: NSObject {
 
     enum ModelError: Error {
         case parseError
+        case eventError
     }
 
     private static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
@@ -32,30 +33,57 @@ class Model: NSObject {
             return false
         }
 
-        print("Testing: will only save first course.")
-        guard let course = courses?.first else {
+        guard let events = filteredCourses?.map({ (course) -> EKEvent in
+            // Create event
+            let event = EKEvent(eventStore: eventStore)
+            event.calendar = calendar
+            event.title = course.course
+            event.location = course.location
+
+            // Set event start/end from course
+            event.startDate = course.firstOccurrence.beginning
+            event.endDate = course.firstOccurrence.end
+
+            // Add recurrence rules
+            let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: course.weekdays)
+            event.recurrenceRules = [recurrenceRule]
+
+            return event
+        }) else {
             return false
         }
-
-        // Create event
-        let event = EKEvent(eventStore: eventStore)
-        event.calendar = calendar
-        event.title = course.title
-
-        // Set event start/end from course
-        guard let timePeriod = course.dates.first else {
-            return false
-        }
-        event.startDate = timePeriod.beginning
-        event.endDate = timePeriod.end
 
         do {
-            try eventStore.save(event, span: .thisEvent)
+            try events.forEach({ (event) in
+                try eventStore.save(event, span: .thisEvent)
+            })
         } catch {
+            print("Error saving at least one event.")
             return false
         }
 
         return true
+    }
+
+    static func weekdayRecurrenceRule(withWeekdays weekdays: [Course.Weekday]) -> EKRecurrenceRule {
+        let recurrenceEnd = EKRecurrenceEnd(end: Constants.endDate)
+        let daysOfWeek = weekdays.map({ (weekday) -> EKRecurrenceDayOfWeek in
+            guard let eventWeekday = EKWeekday(rawValue: weekday.rawValue) else {
+                fatalError()
+            }
+            return EKRecurrenceDayOfWeek(eventWeekday)
+        })
+
+        let recurrenceRule = EKRecurrenceRule(recurrenceWith: .weekly,
+                                              interval: 1,
+                                              daysOfTheWeek: daysOfWeek,
+                                              daysOfTheMonth: nil,
+                                              monthsOfTheYear: nil,
+                                              weeksOfTheYear: nil,
+                                              daysOfTheYear: nil,
+                                              setPositions: nil,
+                                              end: recurrenceEnd)
+        return recurrenceRule
     }
 
     func parseHTML(html: String) -> Bool {

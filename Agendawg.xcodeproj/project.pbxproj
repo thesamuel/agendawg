@@ -10,6 +10,7 @@
 		55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */; };
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
+		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
 		61533CF31F5A04DE00EC0306 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */; };
 		61A924931F594F9D002C088A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924921F594F9D002C088A /* TableViewController.swift */; };
 		61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924941F59E9C9002C088A /* CourseTableViewCell.swift */; };
@@ -24,6 +25,7 @@
 		2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.debug.xcconfig"; sourceTree = "<group>"; };
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		61A924921F594F9D002C088A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		61A924941F59E9C9002C088A /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */,
 				612D83501F59024200AE9577 /* Model.swift */,
 				612D834E1F58FF4400AE9577 /* Course.swift */,
+				613D1F191F5A29B1000128CD /* Constants.swift */,
 				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
 				61CE98501F57F81300DCB3B4 /* Assets.xcassets */,
@@ -240,6 +243,7 @@
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
 				61A924931F594F9D002C088A /* TableViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Model.swift in Sources */,
+				613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
