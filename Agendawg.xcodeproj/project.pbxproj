@@ -60,6 +60,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		613D1F1C1F5A6BED000128CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */,
+				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
+				61A924921F594F9D002C088A /* TableViewController.swift */,
+				61CE984B1F57F81300DCB3B4 /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		613D1F1D1F5A6C08000128CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				612D834E1F58FF4400AE9577 /* Course.swift */,
+				612D83501F59024200AE9577 /* Model.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		61CE983D1F57F81300DCB3B4 = {
 			isa = PBXGroup;
 			children = (
@@ -82,13 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				61CE98491F57F81300DCB3B4 /* AppDelegate.swift */,
-				61CE984B1F57F81300DCB3B4 /* ViewController.swift */,
-				61A924921F594F9D002C088A /* TableViewController.swift */,
-				61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */,
-				612D83501F59024200AE9577 /* Model.swift */,
-				612D834E1F58FF4400AE9577 /* Course.swift */,
 				613D1F191F5A29B1000128CD /* Constants.swift */,
-				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
+				613D1F1C1F5A6BED000128CD /* Views */,
+				613D1F1D1F5A6C08000128CD /* Models */,
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
 				61CE98501F57F81300DCB3B4 /* Assets.xcassets */,
 				61CE98521F57F81300DCB3B4 /* LaunchScreen.storyboard */,
