@@ -236,9 +236,9 @@ extension Course {
             }
 
             let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
-            let hour = trimmed.substring(to: hourIndex)
+            let hour = trimmed[..<hourIndex]
             guard let hourInt = Int(hour) else {
-                throw CourseError.invalidHoursFormat(hour)
+                throw CourseError.invalidHoursFormat(String(hour))
             }
             return trimmed + (hourInt >= 7 && hourInt < 12 ? " AM" : " PM")
         }
