@@ -1,0 +1,6 @@
+framework module Pods_Agendawg {
+  umbrella header "Pods-Agendawg-umbrella.h"
+
+  export *
+  module * { export * }
+}

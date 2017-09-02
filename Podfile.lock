@@ -1,0 +1,25 @@
+PODS:
+  - DateToolsSwift (2.0.3)
+  - Kanna (2.2.1)
+
+DEPENDENCIES:
+  - DateToolsSwift
+  - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, branch `feature/v4.0.0`)
+
+EXTERNAL SOURCES:
+  Kanna:
+    :branch: feature/v4.0.0
+    :git: https://github.com/tid-kijyun/Kanna.git
+
+CHECKOUT OPTIONS:
+  Kanna:
+    :commit: 0b1058299b70606fdb4f4c421437d880776e1b34
+    :git: https://github.com/tid-kijyun/Kanna.git
+
+SPEC CHECKSUMS:
+  DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  Kanna: 9d03f5e7aba03906fbb764eef5a83dbfb5c98fb5
+
+PODFILE CHECKSUM: 9b1e074582755bdbac6297a1f1eae24591bd7e91
+
+COCOAPODS: 1.3.1
