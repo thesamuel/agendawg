@@ -8,6 +8,7 @@
 
 import Foundation
 import DateToolsSwift
+import EventKit
 
 struct Course {
 
@@ -44,7 +45,10 @@ struct Course {
     }
 
     enum CourseError: Error {
-        case InvalidTimeFormat(String)
+        case invalidTimeFormat(String)
+        case invalidNumberOfDays(Int)
+        case noDateOfFirstOccurrence
+        case invalidHoursFormat(String)
     }
 
     let SLN: Int
@@ -52,7 +56,7 @@ struct Course {
     let title: String
     let type: CourseType
     let firstOccurrence: TimePeriod
-    let weekdays: [Weekday]
+    let weekdays: [EKWeekday]
 
     let credits: Double?
     let location: String?
@@ -81,7 +85,10 @@ struct Course {
         let time = row[Index.time.rawValue]
         let days = row[Index.days.rawValue]
         weekdays = Course.weekdays(for: days)
-        firstOccurrence = Course.firstOccurrence(withTime: time, weekdays: weekdays)
+        guard let firstOccurrence = try? Course.firstOccurrence(withTime: time, weekdays: weekdays) else {
+            return nil
+        }
+        self.firstOccurrence = firstOccurrence
 
         // Save Optional properties
         credits = Double(row[Index.credits.rawValue])
@@ -152,17 +159,9 @@ extension Course {
     static let dayChunk = TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 1,
                                     weeks: 0, months: 0, years: 0)
 
-    enum Weekday: Int {
-        case monday = 2
-        case tuesday
-        case wednesday
-        case thursday
-        case friday
-    }
-
-    static func firstOccurrence(withTime timeString: String, weekdays: [Weekday]) -> TimePeriod {
-        guard weekdays.count > 0 else {
-            fatalError()
+    static func firstOccurrence(withTime timeString: String, weekdays: [EKWeekday]) throws -> TimePeriod {
+        guard weekdays.count > 0, weekdays.count <= 5 else {
+            throw CourseError.invalidNumberOfDays(weekdays.count)
         }
 
         guard let dateOfFirstOccurrence =
@@ -174,12 +173,12 @@ extension Course {
                 }
                 return previousDate.isLater(than: date) ? date : previousDate
             }) else {
-                fatalError()
+                throw CourseError.noDateOfFirstOccurrence
         }
 
-        let timeOfFirstOccurrence = formatTime(time: timeString)
+        let timesOfFirstOccurrence = try times(for: timeString)
 
-        let adjustedDates = timeOfFirstOccurrence.map({ (date) -> Date in
+        let adjustedDates = timesOfFirstOccurrence.map({ (date) -> Date in
             var date = date
             date.day(dateOfFirstOccurrence.day)
             date.month(dateOfFirstOccurrence.month)
@@ -189,37 +188,37 @@ extension Course {
         return TimePeriod(beginning: adjustedDates[0], end: adjustedDates[1])
     }
 
-    static func weekdays(for daysString: String) -> [Weekday] {
-        var formattedWeekdays = [Weekday]()
-        var foundT = false
+    static func weekdays(for daysString: String) -> [EKWeekday] {
+        var formattedWeekdays = [EKWeekday]()
+        var foundLetterT = false
         daysString.forEach { (character) in
-            if foundT {
-                let additionalWeekday = character == "h" ? Weekday.thursday : Weekday.tuesday
+            if foundLetterT {
+                let additionalWeekday = character == "h" ? EKWeekday.thursday : EKWeekday.tuesday
                 formattedWeekdays.append(additionalWeekday)
-                foundT = false
+                foundLetterT = false
             }
             if character == "T" {
-                foundT = true
+                foundLetterT = true
             }
         }
-        if foundT == true {
-            formattedWeekdays.append(Weekday.tuesday)
+        if foundLetterT == true {
+            formattedWeekdays.append(EKWeekday.tuesday)
         }
 
         if daysString.contains("M") {
-            formattedWeekdays.append(Weekday.monday)
+            formattedWeekdays.append(EKWeekday.monday)
         }
         if daysString.contains("W") {
-            formattedWeekdays.append(Weekday.wednesday)
+            formattedWeekdays.append(EKWeekday.wednesday)
         }
         if daysString.contains("F") {
-            formattedWeekdays.append(Weekday.friday)
+            formattedWeekdays.append(EKWeekday.friday)
         }
 
         return formattedWeekdays
     }
 
-    static func firstWeekdayDate(for weekday: Weekday, startDate: Date) -> Date {
+    static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
         var date = startDate
         while(date.weekday != weekday.rawValue) {
             date = date.add(dayChunk)
@@ -227,9 +226,10 @@ extension Course {
         return date
     }
 
-    static func formatTime(time: String) -> [Date] {
-        let timeComponents = time.components(separatedBy: "-")
-        let formattedTime = timeComponents.map { (time) -> String in
+    static func times(for timeString: String) throws -> [Date] {
+        let timeComponents = timeString.components(separatedBy: "-")
+
+        let formattedTimes = try timeComponents.map { (time) throws -> String in
             var trimmed = time.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if trimmed.count == 3 {
                 trimmed = "0" + trimmed
@@ -238,20 +238,20 @@ extension Course {
             let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
             let hour = trimmed.substring(to: hourIndex)
             guard let hourInt = Int(hour) else {
-                fatalError()
+                throw CourseError.invalidHoursFormat(hour)
             }
             return trimmed + (hourInt >= 7 && hourInt < 12 ? " AM" : " PM")
         }
 
-        guard formattedTime.count == 2 else {
-            fatalError()
+        guard formattedTimes.count == 2 else {
+            throw CourseError.invalidTimeFormat(timeString)
         }
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hhmm a"
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.timeZone = TimeZone(abbreviation: "PST")
-        return formattedTime.map { (time) -> Date in
+        return formattedTimes.map { (time) -> Date in
             guard let date = dateFormatter.date(from: time) else {
                 fatalError()
             }

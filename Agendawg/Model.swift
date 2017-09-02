@@ -65,13 +65,10 @@ class Model: NSObject {
         return true
     }
 
-    static func weekdayRecurrenceRule(withWeekdays weekdays: [Course.Weekday]) -> EKRecurrenceRule {
+    static func weekdayRecurrenceRule(withWeekdays weekdays: [EKWeekday]) -> EKRecurrenceRule {
         let recurrenceEnd = EKRecurrenceEnd(end: Constants.endDate)
         let daysOfWeek = weekdays.map({ (weekday) -> EKRecurrenceDayOfWeek in
-            guard let eventWeekday = EKWeekday(rawValue: weekday.rawValue) else {
-                fatalError()
-            }
-            return EKRecurrenceDayOfWeek(eventWeekday)
+            return EKRecurrenceDayOfWeek(weekday)
         })
 
         let recurrenceRule = EKRecurrenceRule(recurrenceWith: .weekly,
