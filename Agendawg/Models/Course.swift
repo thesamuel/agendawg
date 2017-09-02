@@ -148,7 +148,7 @@ struct Course {
 
 }
 
-// MARK: Date helper functions
+// MARK: - Date helper functions
 
 private extension Course {
 
@@ -256,6 +256,8 @@ private extension Course {
     }
 
 }
+
+// MARK: Hashable
 
 extension Course: Hashable {
 

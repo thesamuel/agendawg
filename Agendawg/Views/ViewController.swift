@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - UIWebViewDelegate
+
 extension ViewController: UIWebViewDelegate {
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
