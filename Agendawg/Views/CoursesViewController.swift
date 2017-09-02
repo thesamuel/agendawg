@@ -9,23 +9,29 @@
 import UIKit
 import EventKit
 
-class TableViewController: UITableViewController {
+class CoursesViewController: UIViewController {
 
     var checked = [Course: Bool]()
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nextButton: UIButton!
 
     var model: Model! {
         didSet {
             checked.removeAll()
-            tableView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        nextButton.layer.cornerRadius = 8
+        nextButton.clipsToBounds = true
+
+        tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? CalendarTableViewController {
+        if let destination = segue.destination as? CalendarsViewController {
             filterCourses()
             destination.model = model
         }
@@ -41,18 +47,22 @@ class TableViewController: UITableViewController {
         })
     }
 
-    // MARK: - Table view data source
+}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+// MARK: - Table view data source
+
+extension CoursesViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.courses?.count ?? 0
     }
 
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell",
                                                        for: indexPath) as? CourseTableViewCell else {
             fatalError()
@@ -75,7 +85,7 @@ class TableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath), let course = model.courses?[indexPath.row],
             let isCourseChecked = checked[course] {
             let newValue = !isCourseChecked

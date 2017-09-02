@@ -28,16 +28,9 @@ class WelcomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        // Show the navigation bar on other view controllers
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
     func parseHTML(_ html: String) {
         if model.parseHTML(html: html) {
-            self.performSegue(withIdentifier: "SuccessSegue", sender: self)
+            self.performSegue(withIdentifier: "CoursesSegue", sender: self)
             loginViewController?.dismiss(animated: true, completion: nil)
         }
     }
@@ -50,8 +43,8 @@ class WelcomeViewController: UIViewController {
                 loginViewController.parseHTML = parseHTML
                 self.loginViewController = loginViewController
             }
-        } else if let tableViewController = segue.destination as? TableViewController {
-            tableViewController.model = model
+        } else if let coursesViewController = segue.destination as? CoursesViewController {
+            coursesViewController.model = model
         }
     }
 

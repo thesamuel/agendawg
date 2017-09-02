@@ -9,32 +9,44 @@
 import UIKit
 import EventKit
 
-class CalendarTableViewController: UITableViewController {
+class CalendarsViewController: UIViewController {
 
     let eventStore = EKEventStore()
     var calendars: [EKCalendar]?
-    var currentPermissionAlert: UIAlertController?
     var model: Model!
+
+    var currentPermissionAlert: UIAlertController?
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var doneButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        doneButton.layer.cornerRadius = 8
+        doneButton.clipsToBounds = true
+
+        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         checkCalendarAuthorizationStatus()
     }
 
-    // MARK: - Table view data source
+}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+// MARK: - Table view data source
+
+extension CalendarsViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calendars?.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell", for: indexPath)
 
         cell.textLabel?.text = calendars?[indexPath.row].title
@@ -42,7 +54,7 @@ class CalendarTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let calendar = calendars?[indexPath.row] {
             if model.saveEvents(toCalendar: calendar, inEventStore: eventStore) {
                 print("Events saved successfully.")
@@ -56,7 +68,7 @@ class CalendarTableViewController: UITableViewController {
 
 // MARK: - Calendar helper functions
 
-extension CalendarTableViewController {
+extension CalendarsViewController {
 
     func checkCalendarAuthorizationStatus() {
         dismissPermissionAlert()

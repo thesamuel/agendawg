@@ -12,8 +12,8 @@
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
 		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
-		61533CF31F5A04DE00EC0306 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */; };
-		61A924931F594F9D002C088A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924921F594F9D002C088A /* TableViewController.swift */; };
+		61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */; };
+		61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924921F594F9D002C088A /* CoursesViewController.swift */; };
 		61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924941F59E9C9002C088A /* CourseTableViewCell.swift */; };
 		61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE98491F57F81300DCB3B4 /* AppDelegate.swift */; };
 		61CE984C1F57F81300DCB3B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE984B1F57F81300DCB3B4 /* LoginViewController.swift */; };
@@ -28,8 +28,8 @@
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
-		61A924921F594F9D002C088A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsViewController.swift; sourceTree = "<group>"; };
+		61A924921F594F9D002C088A /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		61A924941F59E9C9002C088A /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		61CE98461F57F81300DCB3B4 /* Agendawg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendawg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61CE98491F57F81300DCB3B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,9 +65,9 @@
 		613D1F1C1F5A6BED000128CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				61533CF21F5A04DE00EC0306 /* CalendarTableViewController.swift */,
+				61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */,
 				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
-				61A924921F594F9D002C088A /* TableViewController.swift */,
+				61A924921F594F9D002C088A /* CoursesViewController.swift */,
 				61CE984B1F57F81300DCB3B4 /* LoginViewController.swift */,
 				612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */,
 			);
@@ -259,9 +259,9 @@
 				612D834F1F58FF4400AE9577 /* Course.swift in Sources */,
 				61CE984C1F57F81300DCB3B4 /* LoginViewController.swift in Sources */,
 				61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */,
-				61533CF31F5A04DE00EC0306 /* CalendarTableViewController.swift in Sources */,
+				61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */,
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
-				61A924931F594F9D002C088A /* TableViewController.swift in Sources */,
+				61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Model.swift in Sources */,
 				613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */,
 			);
