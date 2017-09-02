@@ -39,14 +39,8 @@ public enum ParseOption {
     case htmlParseUseLibxml(Libxml2HTMLParserOptions)
 }
 
-public let kDefaultXmlParseOption   = ParseOption.xmlParseUseLibxml([.RECOVER, .NOERROR, .NOWARNING])
-public let kDefaultHtmlParseOption  = ParseOption.htmlParseUseLibxml([.RECOVER, .NOERROR, .NOWARNING])
-
-public enum ParseError: Error {
-    case Empty
-    case EncodingMismatch
-    case InvalidOptions
-}
+private let kDefaultXmlParseOption   = ParseOption.xmlParseUseLibxml([.RECOVER, .NOERROR, .NOWARNING])
+private let kDefaultHtmlParseOption  = ParseOption.htmlParseUseLibxml([.RECOVER, .NOERROR, .NOWARNING])
 
 /**
 Parse XML
@@ -56,37 +50,37 @@ Parse XML
 @param encoding the document encoding
 @param options  a ParserOption
 */
-public func XML(xml: String, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) throws -> XMLDocument {
+public func XML(xml: String, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) -> XMLDocument? {
     switch option {
     case .xmlParseUseLibxml(let opt):
-        return try libxmlXMLDocument(xml: xml, url: url, encoding: encoding, option: opt.rawValue)
+        return libxmlXMLDocument(xml: xml, url: url, encoding: encoding, option: opt.rawValue)
     default:
-        throw ParseError.InvalidOptions
+        return nil
     }
 }
 
-public func XML(xml: String, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) throws -> XMLDocument {
-    return try XML(xml: xml, url: nil, encoding: encoding, option: option)
+public func XML(xml: String, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) -> XMLDocument? {
+    return XML(xml: xml, url: nil, encoding: encoding, option: option)
 }
 
 // NSData
-public func XML(xml: Data, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) throws -> XMLDocument {
-    guard let xmlStr = String(data: xml, encoding: encoding) else {
-        throw ParseError.EncodingMismatch
+public func XML(xml: Data, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) -> XMLDocument? {
+    if let xmlStr = String(data: xml, encoding: encoding) {
+        return XML(xml: xmlStr, url: url, encoding: encoding, option: option)
     }
-    return try XML(xml: xmlStr, url: url, encoding: encoding, option: option)
+    return nil
 }
 
-public func XML(xml: Data, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) throws -> XMLDocument {
-    return try XML(xml: xml, url: nil, encoding: encoding, option: option)
+public func XML(xml: Data, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) -> XMLDocument? {
+    return XML(xml: xml, url: nil, encoding: encoding, option: option)
 }
 
 // NSURL
-public func XML(url: URL, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) throws -> XMLDocument {
-    guard let data = try? Data(contentsOf: url) else {
-        throw ParseError.EncodingMismatch
+public func XML(url: URL, encoding: String.Encoding, option: ParseOption = kDefaultXmlParseOption) -> XMLDocument? {
+    if let data = try? Data(contentsOf: url) {
+        return XML(xml: data, url: url.absoluteString, encoding: encoding, option: option)
     }
-    return try XML(xml: data, url: url.absoluteString, encoding: encoding, option: option)
+    return nil
 }
 
 //-------------------------------------------------------------
@@ -125,37 +119,37 @@ Parse HTML
 @param encoding the document encoding
 @param options  a ParserOption
 */
-public func HTML(html: String, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) throws -> HTMLDocument {
+public func HTML(html: String, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) -> HTMLDocument? {
     switch option {
     case .htmlParseUseLibxml(let opt):
-        return try libxmlHTMLDocument(html: html, url: url, encoding: encoding, option: opt.rawValue)
+        return libxmlHTMLDocument(html: html, url: url, encoding: encoding, option: opt.rawValue)
     default:
-        throw ParseError.InvalidOptions
+        return nil
     }
 }
 
-public func HTML(html: String, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) throws -> HTMLDocument {
-    return try HTML(html: html, url: nil, encoding: encoding, option: option)
+public func HTML(html: String, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) -> HTMLDocument? {
+    return HTML(html: html, url: nil, encoding: encoding, option: option)
 }
 
 // NSData
-public func HTML(html: Data, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) throws -> HTMLDocument {
-    guard let htmlStr = String(data: html, encoding: encoding) else {
-        throw ParseError.EncodingMismatch
+public func HTML(html: Data, url: String?, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) -> HTMLDocument? {
+    if let htmlStr = String(data: html, encoding: encoding) {
+        return HTML(html: htmlStr, url: url, encoding: encoding, option: option)
     }
-    return try HTML(html: htmlStr, url: url, encoding: encoding, option: option)
+    return nil
 }
 
-public func HTML(html: Data, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) throws -> HTMLDocument {
-    return try HTML(html: html, url: nil, encoding: encoding, option: option)
+public func HTML(html: Data, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) -> HTMLDocument? {
+    return HTML(html: html, url: nil, encoding: encoding, option: option)
 }
 
 // NSURL
-public func HTML(url: URL, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) throws -> HTMLDocument {
-    guard let data = try? Data(contentsOf: url) else {
-        throw ParseError.EncodingMismatch
+public func HTML(url: URL, encoding: String.Encoding, option: ParseOption = kDefaultHtmlParseOption) -> HTMLDocument? {
+    if let data = try? Data(contentsOf: url) {
+        return HTML(html: data, url: url.absoluteString, encoding: encoding, option: option)
     }
-    return try HTML(html: data, url: url.absoluteString, encoding: encoding, option: option)
+    return nil
 }
 
 //-------------------------------------------------------------

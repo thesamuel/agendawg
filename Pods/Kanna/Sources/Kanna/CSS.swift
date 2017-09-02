@@ -32,15 +32,11 @@ import libxml2
 
 #if os(Linux)
 typealias AKTextCheckingResult = TextCheckingResult
-typealias AKRegularExpression  = NSRegularExpression
+typealias AKRegularExpression  = RegularExpression
 #else
 typealias AKRegularExpression  = NSRegularExpression
 typealias AKTextCheckingResult = NSTextCheckingResult
 #endif
-
-public enum CSSError: Error {
-    case UnsupportSyntax(String)
-}
 
 /**
 CSS
@@ -53,7 +49,7 @@ public struct CSS {
     
     @return XPath
     */
-    public static func toXPath(_ selector: String) throws -> String {
+    public static func toXPath(_ selector: String) -> String? {
         var xpath = "//"
         var str = selector
         var prev = str
@@ -93,7 +89,8 @@ public struct CSS {
             }
 
             if str == prev {
-                throw CSSError.UnsupportSyntax(selector)
+                print("CSS Syntax Error: Unsupport syntax '\(selector)'")
+                return nil
             }
             prev = str
         }
@@ -155,7 +152,11 @@ private let matchSubBlank     = firstMatch("^\\s*$")
 
 private func substringWithRangeAtIndex(_ result: AKTextCheckingResult, str: String, at: Int) -> String {
     if result.numberOfRanges > at {
+        #if os(Linux)
         let range = result.range(at: at)
+        #else
+        let range = result.rangeAt(at)
+        #endif
         if range.length > 0 {
             let startIndex = str.index(str.startIndex, offsetBy: range.location)
             let endIndex = str.index(startIndex, offsetBy: range.length)
@@ -319,7 +320,11 @@ private func getAttrNot(_ str: inout String, skip: Bool = true) -> String? {
         if let attr = getAttribute(&one, skip: false) {
             return attr
         } else if let sub = matchElement(one) {
+            #if os(Linux)
             let range = sub.range(at: 1)
+            #else
+            let range = sub.rangeAt(1)
+            #endif
             let startIndex = one.index(one.startIndex, offsetBy: range.location)
             let endIndex   = one.index(startIndex, offsetBy: range.length)
 
