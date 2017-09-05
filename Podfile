@@ -8,5 +8,7 @@ target 'Agendawg' do
   # Pods for Agendawg
   pod 'DateToolsSwift'
   pod 'Kanna'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
