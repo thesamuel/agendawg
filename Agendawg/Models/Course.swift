@@ -91,7 +91,8 @@ struct Course {
         let time = row[Index.time.rawValue]
         let days = row[Index.days.rawValue]
         weekdays = Course.weekdays(for: days)
-        guard let firstOccurrence = try? Course.firstOccurrence(withTime: time, weekdays: weekdays) else {
+        guard let firstOccurrence = try? Course.firstOccurrence(withTime: time,
+                                                                weekdays: weekdays) else {
             return nil
         }
         self.firstOccurrence = firstOccurrence
@@ -152,10 +153,8 @@ struct Course {
 
 private extension Course {
 
-    static let dayChunk = TimeChunk(seconds: 0, minutes: 0, hours: 0, days: 1,
-                                    weeks: 0, months: 0, years: 0)
-
-    static func firstOccurrence(withTime timeString: String, weekdays: [EKWeekday]) throws -> TimePeriod {
+    static func firstOccurrence(withTime timeString: String,
+                                weekdays: [EKWeekday]) throws -> TimePeriod {
         guard weekdays.count > 0, weekdays.count <= 5 else {
             throw CourseError.invalidNumberOfDays(weekdays.count)
         }
@@ -209,9 +208,9 @@ private extension Course {
         dateFormatter.dateFormat = "hhmm a"
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.timeZone = TimeZone(abbreviation: "PST")
-        return formattedTimes.map { (time) -> Date in
+        return try formattedTimes.map { (time) throws -> Date in
             guard let date = dateFormatter.date(from: time) else {
-                fatalError()
+                throw CourseError.invalidTimeFormat(timeString)
             }
             return date
         }
@@ -250,7 +249,7 @@ private extension Course {
     static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
         var date = startDate
         while(date.weekday != weekday.rawValue) {
-            date = date.add(dayChunk)
+            date = date.add(1.days)
         }
         return date
     }

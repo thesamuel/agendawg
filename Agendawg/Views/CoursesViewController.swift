@@ -63,26 +63,29 @@ extension CoursesViewController: UITableViewDataSource, UITableViewDelegate {
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell",
-                                                       for: indexPath) as? CourseTableViewCell else {
-            fatalError()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell",
+                                                 for: indexPath)
+
+        guard let courseCell = cell as? CourseTableViewCell else {
+            print("Cell was not of type CourseCell.")
+            return cell
         }
 
         guard let course = model.courses?[indexPath.row] else {
             print("Course for TableView row \(indexPath.row) not found in model.")
-            return cell
+            return courseCell
         }
-        cell.title = course.title.capitalized
-        cell.detail = course.course
-        cell.emoji = course.emoji
+        courseCell.title = course.title.capitalized
+        courseCell.detail = course.course
+        courseCell.emoji = course.emoji
         if let isCourseChecked = checked[course] {
-            cell.accessoryType = isCourseChecked ? .checkmark : .none
+            courseCell.accessoryType = isCourseChecked ? .checkmark : .none
         } else { // all courses have checkmarks by default
             checked[course] = true
-            cell.accessoryType = .checkmark
+            courseCell.accessoryType = .checkmark
         }
 
-        return cell
+        return courseCell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
