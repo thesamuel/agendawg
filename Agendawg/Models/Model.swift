@@ -18,7 +18,7 @@ class Model: NSObject {
         case eventError
     }
 
-    private static let registrationTableXpath = "//form/table/tbody/tr/td/tt"
+    static let registrationFormSelector = "form#regform table.sps_table"
 
     var courses: [Course]?
     var filteredCourses: [Course]?
@@ -26,6 +26,79 @@ class Model: NSObject {
     func filterCourses(isIncluded: @escaping (Course) -> Bool) {
         filteredCourses = courses?.filter(isIncluded)
     }
+
+    func parseHTML(html: String) -> Bool {
+        guard let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
+            return false
+        }
+
+        let registrationTables = doc.css(Model.registrationFormSelector)
+
+        guard registrationTables.count > 0 else {
+            return false
+        }
+
+        guard let scheduleTable = registrationTables.first?.innerHTML,
+            let scheduleTableDoc = Kanna.HTML(html: scheduleTable,
+                                              encoding: String.Encoding.utf8) else {
+                return false
+        }
+
+        let scheduleRows = scheduleTableDoc.css("tr")
+
+        guard Model.hasValidScheduleHeaderRows(table: scheduleRows) else {
+            return false
+        }
+
+        guard let courses = try? scheduleRows.map(Model.course) else {
+            return false
+        }
+
+        self.courses = courses
+        print("Courses parsed.")
+        return true
+    }
+
+    static func course(from row: XMLElement) throws -> Course {
+        let cells = row.css("tt")
+        let trimmedCells = try cells.map({ (cell) throws -> String in
+            guard let text = cell.text else {
+                throw ModelError.parseError
+            }
+            return text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        })
+        guard let course = Course(row: trimmedCells) else {
+            throw ModelError.parseError
+        }
+        return course
+    }
+
+
+    static func hasValidScheduleHeaderRows(table: XPathObject) -> Bool {
+        guard table.count > 0 else {
+            return false
+        }
+        return true
+    }
+
+//    static func isEntryRow(row: XMLElement) -> Bool {
+//        return false
+//    }
+
+//    static func currentScheduleTable(inDocument: HTMLDocument) -> XPathObject? {
+//        return doc?.css(registrationFormSelector)
+//    }
+
+//    static func fragment(inHTML html: String, withSelector selector: String) -> XPathObject? {
+//        let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8)
+//        return doc?.css(selector)
+//    }
+
+}
+
+// MARK: - Calendar functions
+
+extension Model {
 
     func saveEvents(toCalendar selectedCalendar: EKCalendar,
                     inEventStore eventStore: EKEventStore) -> Bool {
@@ -45,7 +118,8 @@ class Model: NSObject {
             event.endDate = course.firstOccurrence.end!
 
             // Add recurrence rules
-            let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: course.weekdays)
+            let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: course.weekdays,
+                                                             recurrenceEndDate: Constants.endDate + 1.days)
             event.recurrenceRules = [recurrenceRule]
 
             return event
@@ -65,8 +139,9 @@ class Model: NSObject {
         return true
     }
 
-    static func weekdayRecurrenceRule(withWeekdays weekdays: [EKWeekday]) -> EKRecurrenceRule {
-        let recurrenceEnd = EKRecurrenceEnd(end: Constants.endDate)
+    static func weekdayRecurrenceRule(withWeekdays weekdays: [EKWeekday],
+                                      recurrenceEndDate: Date) -> EKRecurrenceRule {
+        let recurrenceEnd = EKRecurrenceEnd(end: recurrenceEndDate)
         let daysOfWeek = weekdays.map({ (weekday) -> EKRecurrenceDayOfWeek in
             return EKRecurrenceDayOfWeek(weekday)
         })
@@ -81,47 +156,6 @@ class Model: NSObject {
                                               setPositions: nil,
                                               end: recurrenceEnd)
         return recurrenceRule
-    }
-
-    func parseHTML(html: String) -> Bool {
-        guard let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
-            return false
-        }
-
-        let registrationTableElements = doc.xpath(Model.registrationTableXpath)
-        guard registrationTableElements.count > 0 else {
-            return false
-        }
-
-        var rows = [[String]]()
-        var currentRow = [String]()
-        for element in registrationTableElements {
-            if currentRow.count >= 10 {
-                rows.append(currentRow)
-                currentRow = [String]()
-            }
-
-            guard let text = element.text else {
-                print("Error parsing HTML.")
-                return false
-            }
-
-            let trimmed = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            currentRow.append(trimmed)
-        }
-
-        guard let courses = try? rows.map { (row) -> Course in
-            guard let course = Course(row: row) else {
-                throw ModelError.parseError
-            }
-            return course
-            }, courses.count > 0 else {
-                return false
-        }
-
-        self.courses = courses
-        print("Courses parsed.")
-        return true
     }
 
 }
