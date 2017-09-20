@@ -38,8 +38,8 @@ class Model: NSObject {
             return false
         }
 
-        guard let scheduleTable = registrationTables.first?.innerHTML,
-            let scheduleTableDoc = Kanna.HTML(html: scheduleTable,
+        guard let scheduleTableHtml = registrationTables.first?.innerHTML,
+            let scheduleTableDoc = Kanna.HTML(html: scheduleTableHtml,
                                               encoding: String.Encoding.utf8) else {
                 return false
         }
@@ -60,16 +60,24 @@ class Model: NSObject {
     }
 
     static func course(from row: XMLElement) throws -> Course {
-        let cells = row.css("tt")
+        guard let rowHtml = row.innerHTML,
+            let rowDoc = Kanna.HTML(html: rowHtml, encoding: String.Encoding.utf8) else {
+                throw ModelError.parseError
+        }
+
+        let cells = rowDoc.css("tt")
         let trimmedCells = try cells.map({ (cell) throws -> String in
             guard let text = cell.text else {
                 throw ModelError.parseError
             }
             return text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         })
+
+        // Create a course from a schedule row
         guard let course = Course(row: trimmedCells) else {
             throw ModelError.parseError
         }
+
         return course
     }
 
