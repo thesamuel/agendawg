@@ -70,9 +70,9 @@
 				61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */,
 				61A924941F59E9C9002C088A /* CourseTableViewCell.swift */,
 				61A924921F594F9D002C088A /* CoursesViewController.swift */,
+				61DB76021F5AB85C002B70DF /* DoneViewController.swift */,
 				61CE984B1F57F81300DCB3B4 /* LoginViewController.swift */,
 				612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */,
-				61DB76021F5AB85C002B70DF /* DoneViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

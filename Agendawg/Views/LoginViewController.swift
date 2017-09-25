@@ -42,4 +42,23 @@ extension LoginViewController: UIWebViewDelegate {
         }
     }
 
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        let alert = UIAlertController(title: "Failed to load MyUW",
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+
+        let closeAction = UIAlertAction(title: "Close", style: .cancel) { _ in
+            // TODO: dismiss this controller
+        }
+
+        let retryAction = UIAlertAction(title: "Retry", style: .default) { _ in
+            // TODO: reload the page
+        }
+
+        alert.addAction(closeAction)
+        alert.addAction(retryAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }
