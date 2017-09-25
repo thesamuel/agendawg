@@ -10,8 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    weak var delegate: LoginViewControllerDelegate!
     @IBOutlet weak var webView: UIWebView!
-    var parseHTML: ((String) -> Void)!
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     override func viewDidLoad() {
@@ -38,7 +38,7 @@ extension LoginViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         activityIndicator.stopAnimating()
         if let html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML") {
-            parseHTML(html)
+            delegate.parseHTML(self, html)
         }
     }
 

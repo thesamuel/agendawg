@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
 
     @IBOutlet weak var continueButton: UIButton!
     let model = Model()
@@ -31,24 +31,36 @@ class WelcomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    func parseHTML(_ html: String) {
-        if model.parseHTML(html: html) {
-            self.performSegue(withIdentifier: "CoursesSegue", sender: self)
-            loginViewController?.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationViewController = segue.destination as? UINavigationController {
             if let loginViewController = navigationViewController.viewControllers.first as? LoginViewController {
-                loginViewController.parseHTML = parseHTML
-                self.loginViewController = loginViewController
+                loginViewController.delegate = self
             }
         } else if let coursesViewController = segue.destination as? CoursesViewController {
             coursesViewController.model = model
         }
     }
+
+    // MARK: - LoginViewControllerDelegate functions
+
+    func parseHTML(_ loginViewController: LoginViewController, _ html: String) {
+        if model.parseHTML(html: html) {
+            self.performSegue(withIdentifier: "CoursesSegue", sender: self)
+            loginViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func dismiss(_ loginViewController: UIViewController) {
+        dismiss(loginViewController)
+    }
+
+}
+
+// MARK: - LoginViewControllerDelegate
+
+protocol LoginViewControllerDelegate: class {
+
+    func parseHTML(_ loginViewController: LoginViewController, _ html: String)
+    func dismiss(_ loginViewController: UIViewController)
 
 }
