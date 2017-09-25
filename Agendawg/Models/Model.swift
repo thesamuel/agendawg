@@ -120,6 +120,12 @@ extension Model {
             event.title = course.course
             event.location = course.location
 
+            let instructor = "Instructor: " + (course.instructor ?? "unknown")
+            let sln = "SLN: " +  String(course.SLN)
+            let tag = "Created with Agendawg."
+
+            event.notes = "\(instructor)\n\(sln)\n\n\(tag)"
+
             // Set event start/end from course
             event.startDate = course.firstOccurrence.beginning!
             event.endDate = course.firstOccurrence.end!
