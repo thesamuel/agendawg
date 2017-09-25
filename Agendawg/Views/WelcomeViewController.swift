@@ -50,10 +50,6 @@ class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
         }
     }
 
-    func dismiss(_ loginViewController: UIViewController) {
-        dismiss(loginViewController)
-    }
-
 }
 
 // MARK: - LoginViewControllerDelegate
@@ -61,6 +57,5 @@ class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
 protocol LoginViewControllerDelegate: class {
 
     func parseHTML(_ loginViewController: LoginViewController, _ html: String)
-    func dismiss(_ loginViewController: UIViewController)
 
 }

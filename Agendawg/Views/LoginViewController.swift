@@ -18,11 +18,15 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         webView.delegate = self
-        let request = URLRequest(url: Constants.registrationURL)
-        webView.loadRequest(request)
+        load()
 
         let activityBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         navigationItem.rightBarButtonItem = activityBarButtonItem
+    }
+
+    func load() {
+        let request = URLRequest(url: Constants.registrationURL)
+        webView.loadRequest(request)
     }
 
 }
@@ -48,11 +52,11 @@ extension LoginViewController: UIWebViewDelegate {
                                       preferredStyle: .alert)
 
         let closeAction = UIAlertAction(title: "Close", style: .cancel) { _ in
-            // TODO: dismiss this controller
+            self.dismiss(animated: true, completion: nil)
         }
 
         let retryAction = UIAlertAction(title: "Retry", style: .default) { _ in
-            // TODO: reload the page
+            self.load()
         }
 
         alert.addAction(closeAction)
