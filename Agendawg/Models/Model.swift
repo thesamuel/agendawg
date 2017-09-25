@@ -19,6 +19,8 @@ class Model: NSObject {
     }
 
     static let registrationFormSelector = "form#regform table.sps_table"
+    private static let numberOfHeaderRows = 2
+    private static let numberOfFooterRows = 2
 
     var courses: [Course]?
     var filteredCourses: [Course]?
@@ -46,11 +48,11 @@ class Model: NSObject {
 
         let scheduleRows = scheduleTableDoc.css("tr")
 
-        guard Model.hasValidScheduleHeaderRows(table: scheduleRows) else {
+        guard let courseRows = Model.courseRows(in: scheduleRows) else {
             return false
         }
 
-        guard let courses = try? scheduleRows.map(Model.course) else {
+        guard let courses = try? courseRows.map(Model.course) else {
             return false
         }
 
@@ -81,26 +83,23 @@ class Model: NSObject {
         return course
     }
 
-
-    static func hasValidScheduleHeaderRows(table: XPathObject) -> Bool {
-        guard table.count > 0 else {
-            return false
+    // TODO: handle no schedule entry rows
+    static func courseRows(in table: XPathObject) -> [XMLElement]? {
+        // Ensure that header rows are present, and they contain the correct contents
+        guard table.count > numberOfHeaderRows,
+            isValidHeaderRow(table[0]),
+            isValidHeaderRow(table[1]) else {
+            return nil
         }
-        return true
+
+        let bodyRows = table.dropFirst(numberOfHeaderRows).dropLast(numberOfFooterRows)
+        return Array(bodyRows)
     }
 
-//    static func isEntryRow(row: XMLElement) -> Bool {
-//        return false
-//    }
-
-//    static func currentScheduleTable(inDocument: HTMLDocument) -> XPathObject? {
-//        return doc?.css(registrationFormSelector)
-//    }
-
-//    static func fragment(inHTML html: String, withSelector selector: String) -> XPathObject? {
-//        let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8)
-//        return doc?.css(selector)
-//    }
+    // TODO: add support for different languages
+    static func isValidHeaderRow(_ row: XMLElement) -> Bool {
+        return true // FIXME
+    }
 
 }
 

@@ -1,5 +1,5 @@
 PODS:
-  - Crashlytics (3.8.5):
+  - Crashlytics (3.8.6):
     - Fabric (~> 1.6.3)
   - DateToolsSwift (2.0.3)
   - Fabric (1.6.12)
@@ -12,7 +12,7 @@ DEPENDENCIES:
   - Kanna
 
 SPEC CHECKSUMS:
-  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   Kanna: 182789ab065e8f9a6ccc2a74ce6283d3401c0c4a

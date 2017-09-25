@@ -75,13 +75,12 @@ struct Course {
             return nil
         }
 
-        guard let SLN = Int(row[Index.SLN.rawValue]),
+        // Required properties
+        guard let SLN = Course.parsedSLN(row[Index.SLN.rawValue]),
             let type = CourseType(rawValue: row[Index.type.rawValue]) else {
                 print("Course row contained invalid SLN or course type.")
                 return nil
         }
-
-        // Required properties
         self.SLN = SLN
         self.type = type
         course = row[Index.course.rawValue]
@@ -97,7 +96,7 @@ struct Course {
         }
         self.firstOccurrence = firstOccurrence
 
-        // Save Optional properties
+        // Optional properties
         credits = Double(row[Index.credits.rawValue])
         emoji = Course.emoji(for: course)
 
@@ -106,6 +105,17 @@ struct Course {
 
         let instructor = row[Index.instructor.rawValue]
         self.instructor = !instructor.isEmpty ? instructor : nil
+    }
+
+    // Remove trailing SLN letters
+    static func parsedSLN(_ rawSLN: String) -> Int? {
+        let trimmedSLN = String(rawSLN.characters.prefix(5))
+
+        guard trimmedSLN.characters.count == 5 else {
+            return nil
+        }
+
+        return Int(trimmedSLN)
     }
 
     // MARK: Helpers

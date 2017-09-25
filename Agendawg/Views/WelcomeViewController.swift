@@ -24,7 +24,10 @@ class WelcomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Hide the navigation bar on the this view controller
+        // TODO: remove after debugging
+//        self.performSegue(withIdentifier: "LoginSegue", sender: self)
+
+        // Hide the navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
