@@ -17,6 +17,7 @@ struct Course {
     enum CourseType: String {
         case lecture = "LC"
         case quiz = "QZ"
+        case seminar = "SM"
     }
 
     enum Emoji: String {
@@ -58,10 +59,10 @@ struct Course {
     let SLN: Int
     let course: String
     let title: String
-    let type: CourseType
     let firstOccurrence: TimePeriod
     let weekdays: [EKWeekday]
 
+    let type: CourseType?
     let credits: Double?
     let location: String?
     let instructor: String?
@@ -76,13 +77,13 @@ struct Course {
         }
 
         // Required properties
-        guard let SLN = Course.parsedSLN(row[Index.SLN.rawValue]),
-            let type = CourseType(rawValue: row[Index.type.rawValue]) else {
+        guard let SLN = Course.parsedSLN(row[Index.SLN.rawValue]) else {
                 print("Course row contained invalid SLN or course type.")
                 return nil
         }
+
         self.SLN = SLN
-        self.type = type
+        self.type = CourseType(rawValue: row[Index.type.rawValue])
         course = row[Index.course.rawValue]
         title = row[Index.title.rawValue]
 
