@@ -12,14 +12,7 @@ import EventKit
 
 struct Course: Hashable {
 
-    // MARK: Enums
-    enum CourseType: String {
-        case lecture = "LC"
-        case quiz = "QZ"
-        case seminar = "SM"
-    }
-
-    enum Emoji: String {
+    enum Major: String {
         case anthropology = "👴🏻"
         case bioengineering = "🔬"
         case biology = "🐒"
@@ -45,9 +38,9 @@ struct Course: Hashable {
     let course: String
     let title: String
     let meetings: [Meeting]
-    let type: CourseType?
+    let type: Registration.CourseType?
     let credits: Double
-    let emoji: Emoji
+    let emoji: Major
 
     // MARK: Comparison
     var hashValue: Int {

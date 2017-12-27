@@ -15,10 +15,8 @@ class CourseBuilder: NSObject {
     enum CourseBuilderError: Error {
         case generalParseError
         case parseError(String)
-        case invalidTimeFormat(String)
         case invalidNumberOfDays(Int)
         case noDateOfFirstOccurrence
-        case invalidHoursFormat(String)
     }
 
     var SLN: String?
@@ -26,14 +24,10 @@ class CourseBuilder: NSObject {
     var title: String?
     var daysList: [String]?
     var timesList: [String]?
-    var type: Course.CourseType?
+    var type: Registration.CourseType?
     var credits: String?
-    var locations = [String]()
-    var instructors = [String]()
-
-    override init() {
-        super.init()
-    }
+    var locations: [String]?
+    var instructors: [String]?
 
     func build() throws -> Course {
         // Ensure that all needed fields are non-nil
@@ -43,14 +37,16 @@ class CourseBuilder: NSObject {
             let title = title,
             let daysList = daysList,
             let timesList = timesList,
-            let rawCredits = credits
+            let rawCredits = credits,
+            let locations = locations,
+            let instructors = instructors
             else {
                 throw CourseBuilderError.generalParseError
         }
 
         // Parse SLN and credits from Strings
         guard
-            let SLN = CourseBuilder.parseSLN(rawSLN),
+            let SLN = CourseBuilder.trimmedSLN(rawSLN),
             let credits = Double(rawCredits)
             else {
                 throw CourseBuilderError.generalParseError
@@ -71,7 +67,7 @@ class CourseBuilder: NSObject {
             let location = locations[index]
             let instructor = instructors[index]
 
-            let weekdays = CourseBuilder.weekdays(for: days)
+            let weekdays = Registration.weekdays(for: days)
             let time = timesList[index]
             let firstOccurrence = try CourseBuilder.firstOccurrence(withTime: time,
                                                                     weekdays: weekdays)
@@ -84,13 +80,13 @@ class CourseBuilder: NSObject {
             meetings.append(meeting)
         }
 
-        let emoji = CourseBuilder.emoji(for: course)
+        let emoji = Registration.emoji(for: course)
 
         return Course(SLN: SLN, course: course, title: title, meetings: meetings, type: type,
                       credits: credits, emoji: emoji)
     }
 
-    static func parseSLN(_ rawSLN: String) -> Int? {
+    static func trimmedSLN(_ rawSLN: String) -> Int? {
         let trimmedSLN = String(rawSLN.prefix(5))
         guard trimmedSLN.count == 5 else {
             return nil
@@ -98,42 +94,8 @@ class CourseBuilder: NSObject {
         return Int(trimmedSLN)
     }
 
-    private static func emoji(for course: String) -> Course.Emoji {
-        let components = course.components(separatedBy: " ")
-        if let department = components.first?.lowercased() {
-            switch department {
-            case "anth", "archy", "bio a":
-                return .anthropology
-            case "bioen", "marbio", "medeng", "pharbe":
-                return .bioengineering
-            case "biol":
-                return .biology
-            case "acctg", "admin", "b a", "ba rm", "b cmu", "b econ", "b pol", "ebiz", "entre",
-                 "fin", "hrmob", "i s", "msis", "i bus", "mgmt", "mktg", "opmgt", "o e", "qmeth",
-                 "st mgt", "scm":
-                return .business
-            case "cse":
-                return .cse
-            case "info", "infx", "insc", "imt", "lis":
-                return .informatics
-            case "math", "amath", "cfrm":
-                return .math
-            case "m e", "meie":
-                return .mechanical
-            case "nsg", "nurs", "nclin", "nmeth":
-                return .nursing
-            case "psych":
-                return .psychology
-            default:
-                break
-            }
-        }
-
-        return Course.Emoji.unknown
-    }
-
     private static func firstOccurrence(withTime timeString: String,
-                                weekdays: [EKWeekday]) throws -> TimePeriod {
+                                        weekdays: [EKWeekday]) throws -> TimePeriod {
         guard weekdays.count > 0, weekdays.count <= 5 else {
             throw CourseBuilderError.invalidNumberOfDays(weekdays.count)
         }
@@ -146,11 +108,12 @@ class CourseBuilder: NSObject {
                     return date
                 }
                 return previousDate.isLater(than: date) ? date : previousDate
-            }) else {
+            })
+            else {
                 throw CourseBuilderError.noDateOfFirstOccurrence
         }
 
-        let timesOfFirstOccurrence = try times(for: timeString)
+        let timesOfFirstOccurrence = try Registration.times(for: timeString)
 
         let adjustedDates = timesOfFirstOccurrence.map({ (date) -> Date in
             var dateCopy = date
@@ -162,69 +125,6 @@ class CourseBuilder: NSObject {
         return TimePeriod(beginning: adjustedDates[0], end: adjustedDates[1])
     }
 
-    private static func times(for timeString: String) throws -> [Date] {
-        let timeComponents = timeString.components(separatedBy: "-")
-
-        let formattedTimes = try timeComponents.map { (time) throws -> String in
-            var trimmed = time.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            if trimmed.count == 3 {
-                trimmed = "0" + trimmed
-            }
-
-            let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
-            let hour = trimmed[..<hourIndex]
-            guard let hourInt = Int(hour) else {
-                throw CourseBuilderError.invalidHoursFormat(String(hour))
-            }
-            return trimmed + (hourInt >= 7 && hourInt < 12 ? " AM" : " PM")
-        }
-
-        guard formattedTimes.count == 2 else {
-            throw CourseBuilderError.invalidTimeFormat(timeString)
-        }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hhmm a"
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.timeZone = TimeZone(abbreviation: "PST")
-        return try formattedTimes.map { (time) throws -> Date in
-            guard let date = dateFormatter.date(from: time) else {
-                throw CourseBuilderError.invalidTimeFormat(timeString)
-            }
-            return date
-        }
-    }
-
-    private static func weekdays(for daysString: String) -> [EKWeekday] {
-        var formattedWeekdays = [EKWeekday]()
-        var foundLetterT = false
-        daysString.forEach { (character) in
-            if foundLetterT {
-                let additionalWeekday = character == "h" ? EKWeekday.thursday : EKWeekday.tuesday
-                formattedWeekdays.append(additionalWeekday)
-                foundLetterT = false
-            }
-            if character == "T" {
-                foundLetterT = true
-            }
-        }
-
-        if foundLetterT == true {
-            formattedWeekdays.append(EKWeekday.tuesday)
-        }
-        if daysString.contains("M") {
-            formattedWeekdays.append(EKWeekday.monday)
-        }
-        if daysString.contains("W") {
-            formattedWeekdays.append(EKWeekday.wednesday)
-        }
-        if daysString.contains("F") {
-            formattedWeekdays.append(EKWeekday.friday)
-        }
-
-        return formattedWeekdays
-    }
-
     private static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
         var date = startDate
         while(date.weekday != weekday.rawValue) {
@@ -232,5 +132,4 @@ class CourseBuilder: NSObject {
         }
         return date
     }
-
 }

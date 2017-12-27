@@ -16,29 +16,6 @@ class CourseFactory: NSObject {
     enum CourseFactoryError: Error {
         case generalParseError
         case parseError(String)
-        case invalidTimeFormat(String)
-        case invalidNumberOfDays(Int)
-        case noDateOfFirstOccurrence
-        case invalidHoursFormat(String)
-    }
-
-    enum CourseType: String {
-        case lecture = "LC"
-        case quiz = "QZ"
-        case seminar = "SM"
-    }
-
-    enum Index: Int {
-        case SLN = 0    // 0. "10290"
-        case course     // 1. "ANTH 101 A"
-        case type       // 2. "LC"
-        case credits    // 3. "5.0"
-        case grading    // 4. "standard\nS/NS\n" (ignore)
-        case title      // 5. "EXPLORING SOC ANTHR"
-        case days       // 6. "MW"
-        case time       // 7. "130- 320" or "1030-1120"
-        case location   // 8. "JHN 102"
-        case instructor // 9. "Perez,Michael Vincente"
     }
 
     static func makeCourse(from row: XMLElement) throws -> Course {
@@ -49,63 +26,79 @@ class CourseFactory: NSObject {
                 throw CourseFactoryError.generalParseError
         }
 
+        // Build course
         let builder = CourseBuilder()
-        let cells = rowDoc.css("tt")
+        let cells = rowDoc.css(Registration.cellSelector)
         for (index, cell) in cells.enumerated() {
-            let indexMatch = Index(rawValue: index)!
+            guard let regIndex = Registration.Index(rawValue: index) else {
+                throw CourseFactoryError.generalParseError
+            }
 
-            switch indexMatch {
+            switch regIndex {
             case .SLN, .course, .type, .credits, .title:
-                guard let cellText = cell.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-                    throw CourseFactoryError.generalParseError
-                }
-                switch indexMatch {
-                case .SLN:
-                    builder.SLN = cellText
-                case .course:
-                    builder.course = cellText
-                case .type:
-                    builder.type = Course.CourseType(rawValue: cellText)
-                case .credits:
-                    builder.credits = cellText
-                case .title:
-                    builder.title = cellText
-                default:
-                    throw CourseFactoryError.generalParseError
-                }
+                try parseSingleLineCell(builder: builder, index: regIndex, cell: cell)
             case .days, .time, .location, .instructor:
-                guard let rawLines = cell.innerHTML?.components(separatedBy: "<br>") else {
-                    throw CourseFactoryError.generalParseError
-                }
-
-                let lines = try rawLines.map({ (line) -> String in
-                    guard
-                        let doc = try? Kanna.HTML(html: line, encoding: String.Encoding.utf8),
-                        let text = doc.text
-                        else {
-                            throw CourseFactoryError.generalParseError
-                    }
-
-                    return text
-                })
-
-                switch indexMatch {
-                case .days:
-                    builder.daysList = lines
-                case .time:
-                    builder.timesList = lines
-                case .location:
-                    builder.locations = lines
-                case .instructor:
-                    builder.instructors = lines
-                default:
-                    throw CourseFactoryError.generalParseError
-                }
+                try parseMultiLineCell(builder: builder, index: regIndex, cell: cell)
             case .grading:
                 break
             }
         }
 
         return try builder.build()
+    }
+
+    static func parseSingleLineCell(builder: CourseBuilder, index: Registration.Index,
+                                    cell: XMLElement) throws {
+        // Trim whitespace
+        guard let cellText = cell.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            throw CourseFactoryError.generalParseError
+        }
+
+        switch index {
+        case .SLN:
+            builder.SLN = cellText
+        case .course:
+            builder.course = cellText
+        case .type:
+            builder.type = Registration.CourseType(rawValue: cellText)
+        case .credits:
+            builder.credits = cellText
+        case .title:
+            builder.title = cellText
+        default:
+            throw CourseFactoryError.generalParseError
+        }
+    }
+
+    static func parseMultiLineCell(builder: CourseBuilder, index: Registration.Index,
+                                      cell: XMLElement) throws {
+        // Split lines
+        guard let rawLines = cell.innerHTML?.components(separatedBy: Registration.lineBreak) else {
+            throw CourseFactoryError.generalParseError
+        }
+
+        // Parse each line's HTML individually
+        let lines = try rawLines.map({ (line) -> String in
+            guard
+                let doc = try? Kanna.HTML(html: line, encoding: String.Encoding.utf8),
+                let text = doc.text?.trimmingCharacters(in: CharacterSet.whitespaces)
+                else {
+                    throw CourseFactoryError.generalParseError
+            }
+            return text
+        })
+
+        switch index {
+        case .days:
+            builder.daysList = lines
+        case .time:
+            builder.timesList = lines
+        case .location:
+            builder.locations = lines
+        case .instructor:
+            builder.instructors = lines
+        default:
+            throw CourseFactoryError.generalParseError
+        }
     }
 }

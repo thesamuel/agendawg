@@ -13,15 +13,11 @@ import DateToolsSwift
 
 class Schedule: NSObject {
 
-    enum ModelError: Error {
+    enum ScheduleError: Error {
         case parseError
         case eventError
     }
-
-    static let registrationFormSelector = "form#regform table.sps_table"
-    private static let numberOfHeaderRows = 2
-    private static let numberOfFooterRows = 2
-
+    
     var courses: [Course]?
     var filteredCourses: [Course]?
 
@@ -40,7 +36,7 @@ class Schedule: NSObject {
             return false // not valid HTML
         }
 
-        let registrationTables = doc.css(Schedule.registrationFormSelector)
+        let registrationTables = doc.css(Registration.registrationFormSelector)
 
         guard registrationTables.count > 0 else {
             return false // not the registration page
@@ -72,13 +68,13 @@ class Schedule: NSObject {
     // TODO: handle no schedule entry rows
     static func courseRows(in table: XPathObject) -> [XMLElement]? {
         // Ensure that header rows are present, and they contain the correct contents
-        guard table.count > numberOfHeaderRows,
+        guard table.count > Registration.numberOfHeaderRows,
             isValidHeaderRow(table[0]),
             isValidHeaderRow(table[1]) else {
             return nil
         }
 
-        let bodyRows = table.dropFirst(numberOfHeaderRows).dropLast(numberOfFooterRows)
+        let bodyRows = table.dropFirst(Registration.numberOfHeaderRows).dropLast(Registration.numberOfFooterRows)
         return Array(bodyRows)
     }
 

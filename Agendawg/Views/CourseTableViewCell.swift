@@ -32,10 +32,10 @@ class CourseTableViewCell: UITableViewCell {
         }
     }
 
-    var emoji: Course.Emoji? {
+    var emoji: Course.Major? {
         get {
             if let text = emojiLabel.text{
-                return Course.Emoji(rawValue: text)
+                return Course.Major(rawValue: text)
             }
             return nil
         }
