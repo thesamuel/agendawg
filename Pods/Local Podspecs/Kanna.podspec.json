@@ -1,6 +1,6 @@
 {
   "name": "Kanna",
-  "version": "2.2.1",
+  "version": "4.0.0",
   "summary": "Kanna is an XML/HTML parser for iOS/macOS/watchOS/tvOS and Linux.",
   "homepage": "https://github.com/tid-kijyun/Kanna",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/tid-kijyun/Kanna.git",
-    "tag": "2.2.1"
+    "tag": "4.0.0"
   },
   "social_media_url": "https://twitter.com/_tid_",
   "platforms": {
