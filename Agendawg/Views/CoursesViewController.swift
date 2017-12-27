@@ -15,7 +15,7 @@ class CoursesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
 
-    var model: Model! {
+    var model: Schedule! {
         didSet {
             checked.removeAll()
         }

@@ -13,7 +13,7 @@ class CalendarsViewController: UIViewController {
 
     let eventStore = EKEventStore()
     var calendars: [EKCalendar]?
-    var model: Model!
+    var model: Schedule!
     var checkedCalendar: EKCalendar?
 
     var currentPermissionAlert: UIAlertController?

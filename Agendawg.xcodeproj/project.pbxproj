@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */; };
+		3674D0FFAE0D328BAFF08818 /* Pods_Agendawg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09974162E63F206FA2EC384 /* Pods_Agendawg.framework */; };
 		612A67771F5A7F4D00B5D72D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */; };
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
-		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
+		612D83511F59024200AE9577 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Schedule.swift */; };
 		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
 		61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */; };
 		61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEA1FF242390015EE0E /* CourseFactory.swift */; };
@@ -26,10 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.debug.xcconfig"; sourceTree = "<group>"; };
+		4FC6C97F18CE814868BED945 /* Pods-Agendawg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.release.xcconfig"; sourceTree = "<group>"; };
 		612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		612D83501F59024200AE9577 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsViewController.swift; sourceTree = "<group>"; };
 		61590FEA1FF242390015EE0E /* CourseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFactory.swift; sourceTree = "<group>"; };
@@ -44,8 +44,8 @@
 		61CE98531F57F81300DCB3B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61CE98551F57F81300DCB3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61DB76021F5AB85C002B70DF /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
-		6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.release.xcconfig"; sourceTree = "<group>"; };
-		BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendawg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6BCD901581039052BFFC9AD /* Pods-Agendawg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendawg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg.debug.xcconfig"; sourceTree = "<group>"; };
+		D09974162E63F206FA2EC384 /* Pods_Agendawg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendawg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,21 +53,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55466D78B5CD285F7164C4AB /* Pods_Agendawg.framework in Frameworks */,
+				3674D0FFAE0D328BAFF08818 /* Pods_Agendawg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24B4ECF0A60817357586FFA5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BAACA0392D10067D61FFC52E /* Pods_Agendawg.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		613D1F1C1F5A6BED000128CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +79,7 @@
 				612D834E1F58FF4400AE9577 /* Course.swift */,
 				61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */,
 				61590FEA1FF242390015EE0E /* CourseFactory.swift */,
-				612D83501F59024200AE9577 /* Model.swift */,
+				612D83501F59024200AE9577 /* Schedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,8 +89,8 @@
 			children = (
 				61CE98481F57F81300DCB3B4 /* Agendawg */,
 				61CE98471F57F81300DCB3B4 /* Products */,
-				F0BC251492A4AC101F8D034F /* Pods */,
-				24B4ECF0A60817357586FFA5 /* Frameworks */,
+				801CB4B21285E13BEB0320B3 /* Pods */,
+				D62432D0DC1F0D6C18A4EEE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,13 +117,21 @@
 			path = Agendawg;
 			sourceTree = "<group>";
 		};
-		F0BC251492A4AC101F8D034F /* Pods */ = {
+		801CB4B21285E13BEB0320B3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */,
-				6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */,
+				A6BCD901581039052BFFC9AD /* Pods-Agendawg.debug.xcconfig */,
+				4FC6C97F18CE814868BED945 /* Pods-Agendawg.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D62432D0DC1F0D6C18A4EEE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D09974162E63F206FA2EC384 /* Pods_Agendawg.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,13 +141,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61CE98581F57F81300DCB3B4 /* Build configuration list for PBXNativeTarget "Agendawg" */;
 			buildPhases = (
-				04DC266D127FB25EE021DC26 /* [CP] Check Pods Manifest.lock */,
+				8396F14C659C77AF697ADA7A /* [CP] Check Pods Manifest.lock */,
 				61CE98421F57F81300DCB3B4 /* Sources */,
 				61CE98431F57F81300DCB3B4 /* Frameworks */,
 				61CE98441F57F81300DCB3B4 /* Resources */,
-				D082338C76654BF7C00B2795 /* [CP] Embed Pods Frameworks */,
-				543BBEC0509DD5FF070FDDA0 /* [CP] Copy Pods Resources */,
 				6110A0581F5E356D005C6C71 /* ShellScript */,
+				C2F5D462404817A502E1F889 /* [CP] Embed Pods Frameworks */,
+				A2CC6ED1F9FA69FFFD194F06 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,7 +207,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04DC266D127FB25EE021DC26 /* [CP] Check Pods Manifest.lock */ = {
+		6110A0581F5E356D005C6C71 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" c769eeffb8793d81cabd54942757102d0ab3ff06 a96c84850d00431860e862075872a0921f9440c61e31d15078045ef36a16c39b";
+		};
+		8396F14C659C77AF697ADA7A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,7 +238,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		543BBEC0509DD5FF070FDDA0 /* [CP] Copy Pods Resources */ = {
+		A2CC6ED1F9FA69FFFD194F06 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -240,20 +253,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Agendawg/Pods-Agendawg-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6110A0581F5E356D005C6C71 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" c769eeffb8793d81cabd54942757102d0ab3ff06 a96c84850d00431860e862075872a0921f9440c61e31d15078045ef36a16c39b";
-		};
-		D082338C76654BF7C00B2795 /* [CP] Embed Pods Frameworks */ = {
+		C2F5D462404817A502E1F889 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,7 +290,7 @@
 				61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */,
 				61DB76031F5AB85C002B70DF /* DoneViewController.swift in Sources */,
 				61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */,
-				612D83511F59024200AE9577 /* Model.swift in Sources */,
+				612D83511F59024200AE9577 /* Schedule.swift in Sources */,
 				613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +426,7 @@
 		};
 		61CE98591F57F81300DCB3B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2103A747CE6E60CB711CE274 /* Pods-Agendawg.debug.xcconfig */;
+			baseConfigurationReference = A6BCD901581039052BFFC9AD /* Pods-Agendawg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -446,7 +446,7 @@
 		};
 		61CE985A1F57F81300DCB3B4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FD73EFDD3C5B4DBB1BF5A35 /* Pods-Agendawg.release.xcconfig */;
+			baseConfigurationReference = 4FC6C97F18CE814868BED945 /* Pods-Agendawg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

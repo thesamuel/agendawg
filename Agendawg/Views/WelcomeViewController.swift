@@ -11,7 +11,7 @@ import UIKit
 class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
 
     @IBOutlet weak var continueButton: UIButton!
-    let model = Model()
+    let model = Schedule()
     var loginViewController: LoginViewController?
 
     override func viewDidLoad() {

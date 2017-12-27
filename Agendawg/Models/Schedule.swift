@@ -11,7 +11,7 @@ import Kanna
 import EventKit
 import DateToolsSwift
 
-class Model: NSObject {
+class Schedule: NSObject {
 
     enum ModelError: Error {
         case parseError
@@ -40,7 +40,7 @@ class Model: NSObject {
             return false // not valid HTML
         }
 
-        let registrationTables = doc.css(Model.registrationFormSelector)
+        let registrationTables = doc.css(Schedule.registrationFormSelector)
 
         guard registrationTables.count > 0 else {
             return false // not the registration page
@@ -56,7 +56,7 @@ class Model: NSObject {
 
         let scheduleRows = scheduleTableDoc.css("tr")
 
-        guard let courseRows = Model.courseRows(in: scheduleRows) else {
+        guard let courseRows = Schedule.courseRows(in: scheduleRows) else {
             return false
         }
 
@@ -90,7 +90,7 @@ class Model: NSObject {
 
 // MARK: - Calendar functions
 
-extension Model {
+extension Schedule {
 
     func saveEvents(toCalendar selectedCalendar: EKCalendar,
                     inEventStore eventStore: EKEventStore) -> Bool {
@@ -116,7 +116,7 @@ extension Model {
                 event.endDate = meeting.firstOccurrence.end!
 
                 // Add recurrence rules
-                let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: meeting.weekdays,
+                let recurrenceRule = Schedule.weekdayRecurrenceRule(withWeekdays: meeting.weekdays,
                                                                  recurrenceEndDate: Constants.endDate
                                                                     + 1.days)
                 event.recurrenceRules = [recurrenceRule]
