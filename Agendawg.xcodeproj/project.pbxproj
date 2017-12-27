@@ -13,6 +13,8 @@
 		612D83511F59024200AE9577 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Model.swift */; };
 		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
 		61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */; };
+		61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEA1FF242390015EE0E /* CourseFactory.swift */; };
+		61590FEF1FF3682C0015EE0E /* CourseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */; };
 		61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924921F594F9D002C088A /* CoursesViewController.swift */; };
 		61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A924941F59E9C9002C088A /* CourseTableViewCell.swift */; };
 		61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CE98491F57F81300DCB3B4 /* AppDelegate.swift */; };
@@ -30,6 +32,8 @@
 		612D83501F59024200AE9577 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsViewController.swift; sourceTree = "<group>"; };
+		61590FEA1FF242390015EE0E /* CourseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFactory.swift; sourceTree = "<group>"; };
+		61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBuilder.swift; sourceTree = "<group>"; };
 		61A924921F594F9D002C088A /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		61A924941F59E9C9002C088A /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		61CE98461F57F81300DCB3B4 /* Agendawg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendawg.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				612D834E1F58FF4400AE9577 /* Course.swift */,
+				61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */,
+				61590FEA1FF242390015EE0E /* CourseFactory.swift */,
 				612D83501F59024200AE9577 /* Model.swift */,
 			);
 			path = Models;
@@ -279,6 +285,8 @@
 				61A924951F59E9C9002C088A /* CourseTableViewCell.swift in Sources */,
 				61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */,
 				61CE984A1F57F81300DCB3B4 /* AppDelegate.swift in Sources */,
+				61590FEF1FF3682C0015EE0E /* CourseBuilder.swift in Sources */,
+				61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */,
 				61DB76031F5AB85C002B70DF /* DoneViewController.swift in Sources */,
 				61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Model.swift in Sources */,

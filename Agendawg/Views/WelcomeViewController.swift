@@ -25,7 +25,7 @@ class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
         super.viewWillAppear(animated)
 
         // TODO: remove after debugging
-//        self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        self.performSegue(withIdentifier: "LoginSegue", sender: self)
 
         // Hide the navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: animated)

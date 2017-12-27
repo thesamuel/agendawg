@@ -25,25 +25,32 @@ class Model: NSObject {
     var courses: [Course]?
     var filteredCourses: [Course]?
 
+
     func filterCourses(isIncluded: @escaping (Course) -> Bool) {
         filteredCourses = courses?.filter(isIncluded)
     }
 
+    /// Builds a model from given HTML
+    ///
+    /// - Parameter html: HTML to create model from
+    /// - Returns: true if successful, false if not the correct page
+    /// - Throws: exception if invalid
     func parseHTML(html: String) -> Bool {
         guard let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
-            return false
+            return false // not valid HTML
         }
 
         let registrationTables = doc.css(Model.registrationFormSelector)
 
         guard registrationTables.count > 0 else {
-            return false
+            return false // not the registration page
         }
 
-        guard let scheduleTableHtml = registrationTables.first?.innerHTML,
-            let scheduleTableDoc = Kanna.HTML(html: scheduleTableHtml,
-                                              encoding: String.Encoding.utf8) else {
-                return false
+        guard
+            let scheduleTableHtml = registrationTables.first?.innerHTML,
+            let scheduleTableDoc = Kanna.HTML(html: scheduleTableHtml, encoding: String.Encoding.utf8)
+            else {
+                return false // TODO: should throw an error
         }
 
         let scheduleRows = scheduleTableDoc.css("tr")
@@ -52,35 +59,13 @@ class Model: NSObject {
             return false
         }
 
-        guard let courses = try? courseRows.map(Model.course) else {
-            return false
+        guard let courses = try? courseRows.map(CourseFactory.makeCourse) else {
+            return false // TODO: this should throw an error
         }
 
-        self.courses = courses
+        self.courses = courses // TODO: this should be a builder
         print("Courses parsed.")
         return true
-    }
-
-    static func course(from row: XMLElement) throws -> Course {
-        guard let rowHtml = row.innerHTML,
-            let rowDoc = Kanna.HTML(html: rowHtml, encoding: String.Encoding.utf8) else {
-                throw ModelError.parseError
-        }
-
-        let cells = rowDoc.css("tt")
-        let trimmedCells = try cells.map({ (cell) throws -> String in
-            guard let text = cell.text else {
-                throw ModelError.parseError
-            }
-            return text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        })
-
-        // Create a course from a schedule row
-        guard let course = Course(row: trimmedCells) else {
-            throw ModelError.parseError
-        }
-
-        return course
     }
 
     // TODO: handle no schedule entry rows
@@ -100,7 +85,6 @@ class Model: NSObject {
     static func isValidHeaderRow(_ row: XMLElement) -> Bool {
         return true // FIXME
     }
-
 }
 
 // MARK: - Calendar functions
@@ -109,33 +93,35 @@ extension Model {
 
     func saveEvents(toCalendar selectedCalendar: EKCalendar,
                     inEventStore eventStore: EKEventStore) -> Bool {
-        guard let calendar = eventStore.calendar(withIdentifier: selectedCalendar.calendarIdentifier) else {
-            return false
-        }
+        guard
+            let calendar = eventStore.calendar(withIdentifier: selectedCalendar.calendarIdentifier)
+            else { return false }
 
-        guard let events = filteredCourses?.map({ (course) -> EKEvent in
-            // Create event
-            let event = EKEvent(eventStore: eventStore)
-            event.calendar = calendar
-            event.title = course.course
-            event.location = course.location
+        guard let events = filteredCourses?.flatMap({ course in
+            course.meetings.map({ (meeting) -> EKEvent in
+                // Create event
+                let event = EKEvent(eventStore: eventStore)
+                event.calendar = calendar
+                event.title = course.course
+                event.location = meeting.location
 
-            let instructor = "Instructor: " + (course.instructor ?? "unknown")
-            let sln = "SLN: " +  String(course.SLN)
-            let tag = "Created with Agendawg."
+                let instructor = "Instructor: " + (meeting.instructor)
+                let SLN = "SLN: " + String(course.SLN)
+                let tag = "Created with Agendawg."
+                event.notes = "\(instructor)\n\(SLN)\n\n\(tag)"
 
-            event.notes = "\(instructor)\n\(sln)\n\n\(tag)"
+                // Set event start/end from course
+                event.startDate = meeting.firstOccurrence.beginning!
+                event.endDate = meeting.firstOccurrence.end!
 
-            // Set event start/end from course
-            event.startDate = course.firstOccurrence.beginning!
-            event.endDate = course.firstOccurrence.end!
+                // Add recurrence rules
+                let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: meeting.weekdays,
+                                                                 recurrenceEndDate: Constants.endDate
+                                                                    + 1.days)
+                event.recurrenceRules = [recurrenceRule]
 
-            // Add recurrence rules
-            let recurrenceRule = Model.weekdayRecurrenceRule(withWeekdays: course.weekdays,
-                                                             recurrenceEndDate: Constants.endDate + 1.days)
-            event.recurrenceRules = [recurrenceRule]
-
-            return event
+                return event
+            })
         }) else {
             return false
         }
@@ -170,5 +156,4 @@ extension Model {
                                               end: recurrenceEnd)
         return recurrenceRule
     }
-
 }
