@@ -11,7 +11,7 @@
 		612A67771F5A7F4D00B5D72D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */; };
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Schedule.swift */; };
-		613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Constants.swift */; };
+		613D1F1A1F5A29B1000128CD /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Registration.swift */; };
 		61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */; };
 		61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEA1FF242390015EE0E /* CourseFactory.swift */; };
 		61590FEF1FF3682C0015EE0E /* CourseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */; };
@@ -30,7 +30,7 @@
 		612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
-		613D1F191F5A29B1000128CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		613D1F191F5A29B1000128CD /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsViewController.swift; sourceTree = "<group>"; };
 		61590FEA1FF242390015EE0E /* CourseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFactory.swift; sourceTree = "<group>"; };
 		61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBuilder.swift; sourceTree = "<group>"; };
@@ -76,6 +76,7 @@
 		613D1F1D1F5A6C08000128CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				613D1F191F5A29B1000128CD /* Registration.swift */,
 				612D834E1F58FF4400AE9577 /* Course.swift */,
 				61590FEE1FF3682C0015EE0E /* CourseBuilder.swift */,
 				61590FEA1FF242390015EE0E /* CourseFactory.swift */,
@@ -106,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				61CE98491F57F81300DCB3B4 /* AppDelegate.swift */,
-				613D1F191F5A29B1000128CD /* Constants.swift */,
 				613D1F1C1F5A6BED000128CD /* Views */,
 				613D1F1D1F5A6C08000128CD /* Models */,
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
@@ -291,7 +291,7 @@
 				61DB76031F5AB85C002B70DF /* DoneViewController.swift in Sources */,
 				61A924931F594F9D002C088A /* CoursesViewController.swift in Sources */,
 				612D83511F59024200AE9577 /* Schedule.swift in Sources */,
-				613D1F1A1F5A29B1000128CD /* Constants.swift in Sources */,
+				613D1F1A1F5A29B1000128CD /* Registration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

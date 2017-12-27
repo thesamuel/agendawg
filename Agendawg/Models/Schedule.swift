@@ -117,7 +117,7 @@ extension Schedule {
 
                 // Add recurrence rules
                 let recurrenceRule = Schedule.weekdayRecurrenceRule(withWeekdays: meeting.weekdays,
-                                                                 recurrenceEndDate: Constants.endDate
+                                                                 recurrenceEndDate: Registration.endDate
                                                                     + 1.days)
                 event.recurrenceRules = [recurrenceRule]
 

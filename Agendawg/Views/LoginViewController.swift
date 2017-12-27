@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
 
     func load() {
-        let request = URLRequest(url: Constants.registrationURL)
+        let request = URLRequest(url: Registration.registrationURL)
         webView.loadRequest(request)
     }
 

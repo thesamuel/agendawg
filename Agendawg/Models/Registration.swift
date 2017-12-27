@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Constants {
+struct Registration {
 
     static let startDate = Date(dateString: "January 3, 2018", format: "MMMM d, yyyy")
     static let endDate = Date(dateString: "March 9, 2018", format: "MMMM d, yyyy")

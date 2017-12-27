@@ -140,7 +140,7 @@ class CourseBuilder: NSObject {
 
         guard let dateOfFirstOccurrence =
             weekdays.map({ (weekday) -> Date in
-                return firstWeekdayDate(for: weekday, startDate: Constants.startDate)
+                return firstWeekdayDate(for: weekday, startDate: Registration.startDate)
             }).reduce(nil, { (result, date) -> Date in
                 guard let previousDate = result else {
                     return date
