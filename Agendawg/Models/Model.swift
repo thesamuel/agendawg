@@ -36,7 +36,7 @@ class Model: NSObject {
     /// - Returns: true if successful, false if not the correct page
     /// - Throws: exception if invalid
     func parseHTML(html: String) -> Bool {
-        guard let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
+        guard let doc = try? Kanna.HTML(html: html, encoding: String.Encoding.utf8) else {
             return false // not valid HTML
         }
 
@@ -48,7 +48,8 @@ class Model: NSObject {
 
         guard
             let scheduleTableHtml = registrationTables.first?.innerHTML,
-            let scheduleTableDoc = Kanna.HTML(html: scheduleTableHtml, encoding: String.Encoding.utf8)
+            let scheduleTableDoc = try? Kanna.HTML(html: scheduleTableHtml,
+                                                   encoding: String.Encoding.utf8)
             else {
                 return false // TODO: should throw an error
         }

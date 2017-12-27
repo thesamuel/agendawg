@@ -42,8 +42,10 @@ class CourseFactory: NSObject {
     }
 
     static func makeCourse(from row: XMLElement) throws -> Course {
-        guard let rowHtml = row.innerHTML,
-            let rowDoc = Kanna.HTML(html: rowHtml, encoding: String.Encoding.utf8) else {
+        guard
+            let rowHtml = row.innerHTML,
+            let rowDoc = try? Kanna.HTML(html: rowHtml, encoding: String.Encoding.utf8)
+            else {
                 throw CourseFactoryError.generalParseError
         }
 
@@ -77,10 +79,13 @@ class CourseFactory: NSObject {
                 }
 
                 let lines = try rawLines.map({ (line) -> String in
-                    guard let doc = Kanna.HTML(html: line, encoding: String.Encoding.utf8),
-                        let text = doc.text else {
+                    guard
+                        let doc = try? Kanna.HTML(html: line, encoding: String.Encoding.utf8),
+                        let text = doc.text
+                        else {
                             throw CourseFactoryError.generalParseError
                     }
+
                     return text
                 })
 
