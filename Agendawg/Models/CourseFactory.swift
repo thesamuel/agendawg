@@ -61,13 +61,13 @@ class CourseFactory: NSObject {
                 }
                 switch indexMatch {
                 case .SLN:
-                    builder.SLN = parseSLN(cellText)
+                    builder.SLN = cellText
                 case .course:
                     builder.course = cellText
                 case .type:
                     builder.type = Course.CourseType(rawValue: cellText)
                 case .credits:
-                    builder.credits = Double(cellText)
+                    builder.credits = cellText
                 case .title:
                     builder.title = cellText
                 default:
@@ -107,16 +107,5 @@ class CourseFactory: NSObject {
         }
 
         return try builder.build()
-    }
-
-    static func parseSLN(_ rawSLN: String?) -> Int? {
-        guard let rawSLN = rawSLN else {
-            return nil
-        }
-        let trimmedSLN = String(rawSLN.prefix(5))
-        guard trimmedSLN.count == 5 else {
-            return nil
-        }
-        return Int(trimmedSLN)
     }
 }

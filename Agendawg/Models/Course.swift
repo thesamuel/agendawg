@@ -13,7 +13,6 @@ import EventKit
 struct Course: Hashable {
 
     // MARK: Enums
-
     enum CourseType: String {
         case lecture = "LC"
         case quiz = "QZ"
@@ -42,18 +41,15 @@ struct Course: Hashable {
     }
 
     // MARK: Properties
-
     let SLN: Int
     let course: String
     let title: String
     let meetings: [Meeting]
-
     let type: CourseType?
-    let credits: Double?
-    let emoji: Emoji?
+    let credits: Double
+    let emoji: Emoji
 
-    // MARK: Lifecycle
-
+    // MARK: Comparison
     var hashValue: Int {
         return SLN.hashValue
     }

@@ -21,13 +21,13 @@ class CourseBuilder: NSObject {
         case invalidHoursFormat(String)
     }
 
-    var SLN: Int?
+    var SLN: String?
     var course: String?
     var title: String?
     var daysList: [String]?
     var timesList: [String]?
     var type: Course.CourseType?
-    var credits: Double?
+    var credits: String?
     var locations = [String]()
     var instructors = [String]()
 
@@ -36,16 +36,27 @@ class CourseBuilder: NSObject {
     }
 
     func build() throws -> Course {
+        // Ensure that all needed fields are non-nil
         guard
-            let SLN = SLN,
+            let rawSLN = SLN,
             let course = course,
             let title = title,
             let daysList = daysList,
-            let timesList = timesList
+            let timesList = timesList,
+            let rawCredits = credits
             else {
                 throw CourseBuilderError.generalParseError
         }
 
+        // Parse SLN and credits from Strings
+        guard
+            let SLN = CourseBuilder.parseSLN(rawSLN),
+            let credits = Double(rawCredits)
+            else {
+                throw CourseBuilderError.generalParseError
+        }
+
+        // Ensure that number of days, times, instructors, and locations are equivalent
         guard
             daysList.count == timesList.count,
             daysList.count == instructors.count,
@@ -54,6 +65,7 @@ class CourseBuilder: NSObject {
                 throw CourseBuilderError.generalParseError
         }
 
+        // Create meetings for each (day, time, instructor, location) tuple
         var meetings = [Course.Meeting]()
         for (index, days) in daysList.enumerated() {
             let location = locations[index]
@@ -78,42 +90,49 @@ class CourseBuilder: NSObject {
                       credits: credits, emoji: emoji)
     }
 
-    static func emoji(for course: String) -> Course.Emoji? {
-        let components = course.components(separatedBy: " ")
-        guard let department = components.first?.lowercased() else {
+    static func parseSLN(_ rawSLN: String) -> Int? {
+        let trimmedSLN = String(rawSLN.prefix(5))
+        guard trimmedSLN.count == 5 else {
             return nil
         }
+        return Int(trimmedSLN)
+    }
 
-        switch department {
-        case "anth", "archy", "bio a":
-            return .anthropology
-        case "bioen", "marbio", "medeng", "pharbe":
-            return .bioengineering
-        case "biol":
-            return .biology
-        case "acctg", "admin", "b a", "ba rm", "b cmu", "b econ", "b pol", "ebiz", "entre", "fin",
-             "hrmob", "i s", "msis", "i bus", "mgmt", "mktg", "opmgt", "o e", "qmeth", "st mgt",
-             "scm":
-            return .business
-        case "cse":
-            return .cse
-        case "info", "infx", "insc", "imt", "lis":
-            return .informatics
-        case "math", "amath", "cfrm":
-            return .math
-        case "m e", "meie":
-            return .mechanical
-        case "nsg", "nurs", "nclin", "nmeth":
-            return .nursing
-        case "psych":
-            return .psychology
-        default:
-            break
+    private static func emoji(for course: String) -> Course.Emoji {
+        let components = course.components(separatedBy: " ")
+        if let department = components.first?.lowercased() {
+            switch department {
+            case "anth", "archy", "bio a":
+                return .anthropology
+            case "bioen", "marbio", "medeng", "pharbe":
+                return .bioengineering
+            case "biol":
+                return .biology
+            case "acctg", "admin", "b a", "ba rm", "b cmu", "b econ", "b pol", "ebiz", "entre",
+                 "fin", "hrmob", "i s", "msis", "i bus", "mgmt", "mktg", "opmgt", "o e", "qmeth",
+                 "st mgt", "scm":
+                return .business
+            case "cse":
+                return .cse
+            case "info", "infx", "insc", "imt", "lis":
+                return .informatics
+            case "math", "amath", "cfrm":
+                return .math
+            case "m e", "meie":
+                return .mechanical
+            case "nsg", "nurs", "nclin", "nmeth":
+                return .nursing
+            case "psych":
+                return .psychology
+            default:
+                break
+            }
         }
+
         return Course.Emoji.unknown
     }
 
-    static func firstOccurrence(withTime timeString: String,
+    private static func firstOccurrence(withTime timeString: String,
                                 weekdays: [EKWeekday]) throws -> TimePeriod {
         guard weekdays.count > 0, weekdays.count <= 5 else {
             throw CourseBuilderError.invalidNumberOfDays(weekdays.count)
@@ -143,7 +162,7 @@ class CourseBuilder: NSObject {
         return TimePeriod(beginning: adjustedDates[0], end: adjustedDates[1])
     }
 
-    static func times(for timeString: String) throws -> [Date] {
+    private static func times(for timeString: String) throws -> [Date] {
         let timeComponents = timeString.components(separatedBy: "-")
 
         let formattedTimes = try timeComponents.map { (time) throws -> String in
@@ -176,7 +195,7 @@ class CourseBuilder: NSObject {
         }
     }
 
-    static func weekdays(for daysString: String) -> [EKWeekday] {
+    private static func weekdays(for daysString: String) -> [EKWeekday] {
         var formattedWeekdays = [EKWeekday]()
         var foundLetterT = false
         daysString.forEach { (character) in
@@ -206,7 +225,7 @@ class CourseBuilder: NSObject {
         return formattedWeekdays
     }
 
-    static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
+    private static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
         var date = startDate
         while(date.weekday != weekday.rawValue) {
             date = date.add(1.days)
