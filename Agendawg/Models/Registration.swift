@@ -118,33 +118,25 @@ struct Registration {
     }
 
     static func weekdays(for daysString: String) -> [EKWeekday] {
-        var formattedWeekdays = [EKWeekday]()
-        var foundLetterT = false
-        daysString.forEach { (character) in
-            if foundLetterT {
-                let additionalWeekday = character == "h" ? EKWeekday.thursday : EKWeekday.tuesday
-                formattedWeekdays.append(additionalWeekday)
-                foundLetterT = false
-            }
-            if character == "T" {
-                foundLetterT = true
-            }
-        }
+        var weekdays = [EKWeekday]()
 
-        if foundLetterT == true {
-            formattedWeekdays.append(EKWeekday.tuesday)
-        }
         if daysString.contains("M") {
-            formattedWeekdays.append(EKWeekday.monday)
+            weekdays.append(EKWeekday.monday)
+        }
+        if daysString.range(of: "T(?!h)", options: .regularExpression) != nil {
+            weekdays.append(EKWeekday.tuesday)
         }
         if daysString.contains("W") {
-            formattedWeekdays.append(EKWeekday.wednesday)
+            weekdays.append(EKWeekday.wednesday)
+        }
+        if daysString.contains("Th") {
+            weekdays.append(EKWeekday.thursday)
         }
         if daysString.contains("F") {
-            formattedWeekdays.append(EKWeekday.friday)
+            weekdays.append(EKWeekday.friday)
         }
 
-        return formattedWeekdays
+        return weekdays
     }
 
 }
