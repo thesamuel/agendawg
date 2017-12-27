@@ -108,8 +108,8 @@ class CourseFactory: NSObject {
         guard let rawSLN = rawSLN else {
             return nil
         }
-        let trimmedSLN = String(rawSLN.characters.prefix(5))
-        guard trimmedSLN.characters.count == 5 else {
+        let trimmedSLN = String(rawSLN.prefix(5))
+        guard trimmedSLN.count == 5 else {
             return nil
         }
         return Int(trimmedSLN)

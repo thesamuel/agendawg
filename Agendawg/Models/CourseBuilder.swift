@@ -148,12 +148,12 @@ class CourseBuilder: NSObject {
 
         let formattedTimes = try timeComponents.map { (time) throws -> String in
             var trimmed = time.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            if trimmed.characters.count == 3 {
+            if trimmed.count == 3 {
                 trimmed = "0" + trimmed
             }
 
             let hourIndex = trimmed.index(trimmed.startIndex, offsetBy: 2)
-            let hour = trimmed.substring(to: hourIndex)
+            let hour = trimmed[..<hourIndex]
             guard let hourInt = Int(hour) else {
                 throw CourseBuilderError.invalidHoursFormat(String(hour))
             }
@@ -179,7 +179,7 @@ class CourseBuilder: NSObject {
     static func weekdays(for daysString: String) -> [EKWeekday] {
         var formattedWeekdays = [EKWeekday]()
         var foundLetterT = false
-        daysString.characters.forEach { (character) in
+        daysString.forEach { (character) in
             if foundLetterT {
                 let additionalWeekday = character == "h" ? EKWeekday.thursday : EKWeekday.tuesday
                 formattedWeekdays.append(additionalWeekday)
