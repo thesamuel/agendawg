@@ -47,7 +47,7 @@ class CourseBuilder: NSObject {
         // Parse SLN and credits from Strings
         guard
             let SLN = CourseBuilder.trimmedSLN(rawSLN),
-            let credits = Double(rawCredits)
+            let credits = rawCredits.isEmpty ? 0 : Double(rawCredits)
             else {
                 throw CourseBuilderError.generalParseError
         }

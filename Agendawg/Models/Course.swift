@@ -39,7 +39,7 @@ struct Course: Hashable {
     let title: String
     let meetings: [Meeting]
     let type: Registration.CourseType?
-    let credits: Double
+    let credits: Double?
     let emoji: Major
 
     // MARK: Comparison
