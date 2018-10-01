@@ -24,8 +24,10 @@ class WelcomeViewController: UIViewController, LoginViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // TODO: remove after debugging
+        #if DEBUG
+        // Skip the welcome screen if we're debugging
         self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        #endif
 
         // Hide the navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: animated)

@@ -9,6 +9,7 @@
 import Foundation
 import EventKit
 
+// Specification for much of this information: https://depts.washington.edu/registra/dataServices/SDBdetail.php?screenNum=SRF230
 struct Registration {
 
     static var startDate: Date?
@@ -43,10 +44,18 @@ struct Registration {
         case instructor // 9. "Perez,Michael Vincente"
     }
 
+    // Course type will fall into these
     enum CourseType: String {
+        case clerkship = "CK"
+        case clinic = "CL"
+        case conference = "CO"
+        case independentStudy = "IS"
+        case lab = "LB"
         case lecture = "LC"
+        case practicum = "PR"
         case quiz = "QZ"
         case seminar = "SM"
+        case studio = "ST"
     }
 
     struct AcademicCalendar: Codable {
@@ -67,10 +76,15 @@ struct Registration {
     }
 
     static func setHeading(heading: String) throws {
-        guard let quarter = heading.components(separatedBy: "Registration - ").first else {
+        let headingPrefix = "Registration - "
+        guard heading.starts(with: headingPrefix) else {
             throw RegistrationError.invalidQuarter
         }
-        let dates = try! quarterDates(for: quarter)
+
+        let quarterStartIndex = heading.index(heading.startIndex, offsetBy: headingPrefix.count)
+        let quarter = heading[quarterStartIndex...]
+
+        let dates = try quarterDates(for: String(quarter))
         startDate = dates.startDate
         endDate = dates.endDate
     }
@@ -87,40 +101,6 @@ struct Registration {
             throw RegistrationError.invalidQuarter
         }
         return dates
-    }
-
-    static func emoji(for course: String) -> Course.Major {
-        let components = course.components(separatedBy: " ")
-        if let department = components.first?.lowercased() {
-            switch department {
-            case "anth", "archy", "bio a":
-                return .anthropology
-            case "bioen", "marbio", "medeng", "pharbe":
-                return .bioengineering
-            case "biol":
-                return .biology
-            case "acctg", "admin", "b a", "ba rm", "b cmu", "b econ", "b pol", "ebiz", "entre",
-                 "fin", "hrmob", "i s", "msis", "i bus", "mgmt", "mktg", "opmgt", "o e", "qmeth",
-                 "st mgt", "scm":
-                return .business
-            case "cse":
-                return .cse
-            case "info", "infx", "insc", "imt", "lis":
-                return .informatics
-            case "math", "amath", "cfrm":
-                return .math
-            case "m e", "meie":
-                return .mechanical
-            case "nsg", "nurs", "nclin", "nmeth":
-                return .nursing
-            case "psych":
-                return .psychology
-            default:
-                break
-            }
-        }
-
-        return Course.Major.unknown
     }
 
     static func times(for timeString: String) throws -> [Date] {

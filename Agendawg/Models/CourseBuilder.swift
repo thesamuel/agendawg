@@ -80,7 +80,7 @@ class CourseBuilder: NSObject {
             meetings.append(meeting)
         }
 
-        let emoji = Registration.emoji(for: course)
+        let emoji = Course.emoji(for: course)
 
         return Course(SLN: SLN, course: course, title: title, meetings: meetings, type: type,
                       credits: credits, emoji: emoji)

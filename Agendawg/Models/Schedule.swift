@@ -62,7 +62,7 @@ class Schedule: NSObject {
             return false
         }
 
-        guard let courses = try? courseRows.map(CourseFactory.makeCourse) else {
+        guard let courses = try? courseRows.compactMap(CourseFactory.makeCourse) else {
             return false // TODO: this should throw an error
         }
 

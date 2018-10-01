@@ -18,7 +18,7 @@ class CourseFactory: NSObject {
         case parseError(String)
     }
 
-    static func makeCourse(from row: XMLElement) throws -> Course {
+    static func makeCourse(from row: XMLElement) throws -> Course? {
         guard
             let rowHtml = row.innerHTML,
             let rowDoc = try? Kanna.HTML(html: rowHtml, encoding: String.Encoding.utf8)
@@ -44,7 +44,7 @@ class CourseFactory: NSObject {
             }
         }
 
-        return try builder.build()
+        return try? builder.build()
     }
 
     static func parseSingleLineCell(builder: CourseBuilder, index: Registration.Index,

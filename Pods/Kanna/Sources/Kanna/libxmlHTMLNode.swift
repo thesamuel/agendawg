@@ -27,7 +27,7 @@ import Foundation
 #if SWIFT_PACKAGE
 import SwiftClibxml2
 #else
-import libxml2
+import libxmlKanna
 #endif
 
 /**
@@ -72,10 +72,10 @@ internal final class libxmlHTMLNode: XMLElement {
     
     var tagName:   String? {
         get {
-            if nodePtr != nil {
-                return String(cString: UnsafePointer((nodePtr?.pointee.name)!))
+            guard let name = nodePtr?.pointee.name else {
+                return nil
             }
-            return nil
+            return String(cString: name)
         }
 
         set {
@@ -275,11 +275,16 @@ internal final class libxmlHTMLNode: XMLElement {
 
 private func libxmlGetNodeContent(_ nodePtr: xmlNodePtr) -> String? {
     let content = xmlNodeGetContent(nodePtr)
-    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
+    defer {
+        #if swift(>=4.1)
+        content?.deallocate()
+        #else
         content?.deallocate(capacity: 1)
+        #endif
+    }
+    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
         return result
     }
-    content?.deallocate(capacity: 1)
     return nil
 }
 
