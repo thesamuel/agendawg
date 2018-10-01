@@ -102,7 +102,7 @@ class CourseBuilder: NSObject {
 
         guard let dateOfFirstOccurrence =
             weekdays.map({ (weekday) -> Date in
-                return firstWeekdayDate(for: weekday, startDate: Registration.startDate)
+                return Registration.firstWeekdayDate(for: weekday)
             }).reduce(nil, { (result, date) -> Date in
                 guard let previousDate = result else {
                     return date
@@ -123,13 +123,5 @@ class CourseBuilder: NSObject {
             return dateCopy
         })
         return TimePeriod(beginning: adjustedDates[0], end: adjustedDates[1])
-    }
-
-    private static func firstWeekdayDate(for weekday: EKWeekday, startDate: Date) -> Date {
-        var date = startDate
-        while(date.weekday != weekday.rawValue) {
-            date = date.add(1.days)
-        }
-        return date
     }
 }

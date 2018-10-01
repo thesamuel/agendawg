@@ -11,6 +11,7 @@
 		612A67771F5A7F4D00B5D72D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */; };
 		612D834F1F58FF4400AE9577 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D834E1F58FF4400AE9577 /* Course.swift */; };
 		612D83511F59024200AE9577 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D83501F59024200AE9577 /* Schedule.swift */; };
+		612D98B91FF3C3F300747E07 /* dates.json in Resources */ = {isa = PBXBuildFile; fileRef = 612D98B81FF3C3F300747E07 /* dates.json */; };
 		613D1F1A1F5A29B1000128CD /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D1F191F5A29B1000128CD /* Registration.swift */; };
 		61533CF31F5A04DE00EC0306 /* CalendarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */; };
 		61590FEB1FF242390015EE0E /* CourseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61590FEA1FF242390015EE0E /* CourseFactory.swift */; };
@@ -30,6 +31,7 @@
 		612A67761F5A7F4D00B5D72D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		612D834E1F58FF4400AE9577 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		612D83501F59024200AE9577 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		612D98B81FF3C3F300747E07 /* dates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dates.json; sourceTree = "<group>"; };
 		613D1F191F5A29B1000128CD /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		61533CF21F5A04DE00EC0306 /* CalendarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsViewController.swift; sourceTree = "<group>"; };
 		61590FEA1FF242390015EE0E /* CourseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFactory.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				61CE984D1F57F81300DCB3B4 /* Main.storyboard */,
 				61CE98501F57F81300DCB3B4 /* Assets.xcassets */,
 				61CE98521F57F81300DCB3B4 /* LaunchScreen.storyboard */,
+				612D98B81FF3C3F300747E07 /* dates.json */,
 				61CE98551F57F81300DCB3B4 /* Info.plist */,
 			);
 			path = Agendawg;
@@ -201,6 +204,7 @@
 				61CE98541F57F81300DCB3B4 /* LaunchScreen.storyboard in Resources */,
 				61CE98511F57F81300DCB3B4 /* Assets.xcassets in Resources */,
 				61CE984F1F57F81300DCB3B4 /* Main.storyboard in Resources */,
+				612D98B91FF3C3F300747E07 /* dates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

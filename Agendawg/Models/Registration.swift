@@ -11,22 +11,21 @@ import EventKit
 
 struct Registration {
 
-    static let startDate = Date(dateString: "January 3, 2018", format: "MMMM d, yyyy")
-    static let endDate = Date(dateString: "March 9, 2018", format: "MMMM d, yyyy")
+    static var startDate: Date?
+    static var endDate: Date?
 
-//    static let startDate = Date(dateString: "September 27, 2017", format: "MMMM d, yyyy")
-//    static let endDate = Date(dateString: "December 8, 2017", format: "MMMM d, yyyy")
-
-//    static let registrationURL = URL(string: "https://sdb.admin.uw.edu/students/uwnetid/register.asp")!
-    static let registrationURL = URL(string: "http://localhost:8888/Registration.html")!
+    static let registrationURL = URL(string: "https://sdb.admin.uw.edu/students/uwnetid/register.asp")!
+//    static let registrationURL = URL(string: "http://localhost:8888/Registration.html")!
 
     static let registrationFormSelector = "form#regform table.sps_table"
+    static let headingSelector = "h1"
     static let lineBreak = "<br>"
     static let cellSelector = "tt"
     static let numberOfHeaderRows = 2
     static let numberOfFooterRows = 2
 
     enum RegistrationError: Error {
+        case invalidQuarter
         case invalidTimeFormat(String)
         case invalidHoursFormat(String)
     }
@@ -48,6 +47,46 @@ struct Registration {
         case lecture = "LC"
         case quiz = "QZ"
         case seminar = "SM"
+    }
+
+    struct AcademicCalendar: Codable {
+        let dates: [String: QuarterDates]
+    }
+
+    struct QuarterDates: Codable {
+        let start: String
+        let end: String
+
+        var startDate: Date {
+            return Date(dateString: start, format: "MMMM d, yyyy")
+        }
+
+        var endDate: Date {
+            return Date(dateString: end, format: "MMMM d, yyyy")
+        }
+    }
+
+    static func setHeading(heading: String) throws {
+        guard let quarter = heading.components(separatedBy: "Registration - ").first else {
+            throw RegistrationError.invalidQuarter
+        }
+        let dates = try! quarterDates(for: quarter)
+        startDate = dates.startDate
+        endDate = dates.endDate
+    }
+
+    static func quarterDates(for quarterString: String) throws -> QuarterDates {
+        // File should always be in bundle
+        let datesURL = Bundle.main.url(forResource: "dates", withExtension: "json")!
+        let datesData = try! Data(contentsOf: datesURL)
+
+        let decoder = JSONDecoder()
+        let academicCalendar = try! decoder.decode(AcademicCalendar.self, from: datesData)
+
+        guard let dates = academicCalendar.dates[quarterString.lowercased()] else {
+            throw RegistrationError.invalidQuarter
+        }
+        return dates
     }
 
     static func emoji(for course: String) -> Course.Major {
@@ -139,4 +178,13 @@ struct Registration {
         return weekdays
     }
 
+    static func firstWeekdayDate(for weekday: EKWeekday) -> Date {
+        var date = startDate!
+
+        while date.weekday != weekday.rawValue {
+            date = date.add(1.days)
+        }
+
+        return date
+    }
 }

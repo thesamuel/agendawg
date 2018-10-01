@@ -42,6 +42,12 @@ class Schedule: NSObject {
             return false // not the registration page
         }
 
+        guard let heading = doc.css(Registration.headingSelector).first?.text else {
+            return false // TODO: throw an error here
+        }
+
+        try! Registration.setHeading(heading: heading)
+
         guard
             let scheduleTableHtml = registrationTables.first?.innerHTML,
             let scheduleTableDoc = try? Kanna.HTML(html: scheduleTableHtml,
@@ -101,11 +107,13 @@ extension Schedule {
                 event.calendar = calendar
                 event.title = course.course
                 event.location = meeting.location
+                event.notes = """
+                \(course.title)
+                Instructor: \(meeting.instructor)
+                SLN: \(String(course.SLN))
 
-                let instructor = "Instructor: " + (meeting.instructor)
-                let SLN = "SLN: " + String(course.SLN)
-                let tag = "Created with Agendawg."
-                event.notes = "\(instructor)\n\(SLN)\n\n\(tag)"
+                Created with Agendawg.
+                """
 
                 // Set event start/end from course
                 event.startDate = meeting.firstOccurrence.beginning!
@@ -113,8 +121,7 @@ extension Schedule {
 
                 // Add recurrence rules
                 let recurrenceRule = Schedule.weekdayRecurrenceRule(withWeekdays: meeting.weekdays,
-                                                                 recurrenceEndDate: Registration.endDate
-                                                                    + 1.days)
+                                                                    recurrenceEndDate: Registration.endDate! + 1.days)
                 event.recurrenceRules = [recurrenceRule]
 
                 return event

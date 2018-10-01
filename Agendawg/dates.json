@@ -1,0 +1,102 @@
+{
+	"dates": {
+		"autumn 2018": {
+			"start": "September 26, 2018",
+			"end:": "December 7, 2018"
+		},
+		"winter 2019": {
+			"start": "January 7, 2019",
+			"end:": "March 15, 2019"
+		},
+		"spring 2019": {
+			"start": "April 1, 2019",
+			"end:": "June 7, 2019"
+		},
+		"summer 2019": {
+			"start": "June 24, 2019",
+			"end:": "August 23, 2019"
+		},
+		"autumn 2019": {
+			"start": "September 25, 2019",
+			"end:": "December 6, 2019"
+		},
+		"winter 2020": {
+			"start": "January 6, 2020",
+			"end:": "March 13, 2020"
+		},
+		"spring 2020": {
+			"start": "March 30, 2020",
+			"end:": "June 5, 2020"
+		},
+		"summer 2020": {
+			"start": "June 22, 2020",
+			"end:": "August 21, 2020"
+		},
+		"autumn 2020": {
+			"start": "September 30, 2020",
+			"end:": "December 11, 2020"
+		},
+		"winter 2021": {
+			"start": "January 4, 2021",
+			"end:": "March 12, 2021"
+		},
+		"spring 2021": {
+			"start": "March 29, 2021",
+			"end:": "June 4, 2021"
+		},
+		"summer 2021": {
+			"start": "June 21, 2021",
+			"end:": "August 20, 2021"
+		},
+		"autumn 2021": {
+			"start": "September 29, 2021",
+			"end:": "December 10, 2021"
+		},
+		"winter 2022": {
+			"start": "January 3, 2022",
+			"end:": "March 11, 2022"
+		},
+		"spring 2022": {
+			"start": "March 28, 2022",
+			"end:": "June 3, 2022"
+		},
+		"summer 2022": {
+			"start": "June 20, 2022",
+			"end:": "August 19, 2022"
+		},
+		"autumn 2022": {
+			"start": "September 28, 2022",
+			"end:": "December 9, 2022"
+		},
+		"winter 2023": {
+			"start": "January 3, 2023",
+			"end:": "March 10, 2023"
+		},
+		"spring 2023": {
+			"start": "March 27, 2023",
+			"end:": "June 2, 2023"
+		},
+		"summer 2023": {
+			"start": "June 19, 2023",
+			"end:": "August 18, 2023"
+		},
+		"autumn 2023": {
+			"start": "September 27, 2023",
+			"end:": "December 8, 2023"
+		},
+		"winter 2024": {
+			"start": "January 3, 2024",
+			"end:": "March 8, 2024"
+		},
+		"spring 2024": {
+			"start": "March 25, 2024",
+			"end:": "May 31, 2024"
+		},
+		"summer 2024": {
+			"start": "June 17, 2024",
+			"end:": "August 16, 2024"
+		}
+	}
+
+}
+
