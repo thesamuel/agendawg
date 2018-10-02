@@ -125,7 +125,7 @@ extension CalendarsViewController {
                                                     + "please enable Calendars access in Settings.",
                                                 preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Go to Settings", style: .default) { (_) in
-            UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
         }
         permissionAlert.addAction(settingsAction)
         currentPermissionAlert = permissionAlert

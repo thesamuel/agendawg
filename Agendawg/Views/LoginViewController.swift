@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     
     weak var delegate: LoginViewControllerDelegate!
     @IBOutlet weak var webView: UIWebView!
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override func viewDidLoad() {
         super.viewDidLoad()
